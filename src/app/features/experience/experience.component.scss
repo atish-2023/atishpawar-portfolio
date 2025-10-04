@@ -1,0 +1,31 @@
+.section-alt-bg {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+}
+
+.glassmorphism {
+  background: rgba(30, 41, 59, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #3b82f6;
+  left: -8px;
+  top: 0;
+}
+
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  background: #334155;
+  left: 0;
+  top: 16px;
+}

@@ -1,0 +1,88 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6">Edit Hero Section</h1>
+  
+  <form (ngSubmit)="onSubmit()" [formGroup]="heroForm" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
+        Title
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="title"
+        type="text"
+        placeholder="Your name"
+        formControlName="title">
+    </div>
+    
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="subtitle">
+        Subtitle
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="subtitle"
+        type="text"
+        placeholder="Your role"
+        formControlName="subtitle">
+    </div>
+    
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="intro">
+        Introduction
+      </label>
+      <textarea
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="intro"
+        rows="3"
+        placeholder="Short introduction"
+        formControlName="intro"></textarea>
+    </div>
+    
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="photoUrl">
+        Photo URL
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="photoUrl"
+        type="text"
+        placeholder="URL to your photo"
+        formControlName="photoUrl">
+    </div>
+    
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="ctaText">
+        Call to Action Text
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="ctaText"
+        type="text"
+        placeholder="CTA button text"
+        formControlName="ctaText">
+    </div>
+    
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="ctaTarget">
+        Call to Action Target
+      </label>
+      <select
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="ctaTarget"
+        formControlName="ctaTarget">
+        <option value="projects">Projects</option>
+        <option value="about">About</option>
+        <option value="contact">Contact</option>
+      </select>
+    </div>
+    
+    <div class="flex items-center justify-between">
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        type="submit"
+        [disabled]="heroForm.invalid || !heroForm.dirty">
+        Update Hero
+      </button>
+    </div>
+  </form>
+</div>

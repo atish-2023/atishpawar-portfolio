@@ -1,0 +1,40 @@
+.card-base {
+  border-radius: 1rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  padding: 1.5rem;
+  height: 100%;
+  transition: all 0.3s ease;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #f1f5f9;
+  margin-bottom: 1.5rem;
+}
+
+.card-subtitle {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #cbd5e1;
+  margin-bottom: 1.5rem;
+}
+
+.card-content {
+  color: #94a3b8;
+  margin-bottom: 1rem;
+}
+
+.glassmorphism {
+  background: rgba(30, 41, 59, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gradient-border {
+  position: relative;
+  background: linear-gradient(#0f172a, #0f172a) padding-box,
+              linear-gradient(45deg, #3b82f6, #8b5cf6) border-box;
+  border: 2px solid transparent;
+}

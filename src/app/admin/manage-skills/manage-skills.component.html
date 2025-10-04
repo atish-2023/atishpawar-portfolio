@@ -1,0 +1,134 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6">Manage Skills</h1>
+  
+  <!-- Add/Edit Skill Form -->
+  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-8">
+    <h2 class="text-xl font-semibold mb-4">{{ isEditing ? 'Edit Skill' : 'Add New Skill' }}</h2>
+    
+    <form (ngSubmit)="onSubmit()" [formGroup]="skillForm" class="mb-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+            Skill Name
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="name"
+            type="text"
+            placeholder="Skill name"
+            formControlName="name">
+        </div>
+        
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="level">
+            Proficiency Level (0-100)
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="level"
+            type="number"
+            min="0"
+            max="100"
+            placeholder="Proficiency level"
+            formControlName="level">
+        </div>
+        
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="category">
+            Category
+          </label>
+          <select
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="category"
+            formControlName="category">
+            <option value="Frontend">Frontend</option>
+            <option value="Backend">Backend</option>
+            <option value="Database">Database</option>
+            <option value="Tools">Tools</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="order">
+            Display Order
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="order"
+            type="number"
+            placeholder="Display order"
+            formControlName="order">
+        </div>
+      </div>
+      
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="icon">
+          Icon URL (optional)
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="icon"
+          type="text"
+          placeholder="URL to skill icon"
+          formControlName="icon">
+      </div>
+      
+      <div class="flex items-center justify-between">
+        <button
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          type="submit"
+          [disabled]="skillForm.invalid">
+          {{ isEditing ? 'Update Skill' : 'Add Skill' }}
+        </button>
+        
+        <button
+          *ngIf="isEditing"
+          class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2"
+          type="button"
+          (click)="cancelEdit()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+  
+  <!-- Skills List -->
+  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8">
+    <h2 class="text-xl font-semibold mb-4">Current Skills</h2>
+    
+    <div class="overflow-x-auto">
+      <table class="min-w-full bg-white">
+        <thead>
+          <tr>
+            <th class="py-2 px-4 border-b text-left">Skill</th>
+            <th class="py-2 px-4 border-b text-left">Category</th>
+            <th class="py-2 px-4 border-b text-left">Level</th>
+            <th class="py-2 px-4 border-b text-left">Order</th>
+            <th class="py-2 px-4 border-b text-left">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let skill of skills" class="hover:bg-gray-50">
+            <td class="py-2 px-4 border-b">{{ skill.name }}</td>
+            <td class="py-2 px-4 border-b">{{ skill.category }}</td>
+            <td class="py-2 px-4 border-b">{{ skill.level }}%</td>
+            <td class="py-2 px-4 border-b">{{ skill.order }}</td>
+            <td class="py-2 px-4 border-b">
+              <button
+                class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded text-sm mr-2"
+                (click)="editSkill(skill)">
+                Edit
+              </button>
+              <button
+                class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-sm"
+                (click)="deleteSkill(skill.id!)">
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

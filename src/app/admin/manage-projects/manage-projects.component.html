@@ -1,0 +1,174 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6">Manage Projects</h1>
+  
+  <!-- Add/Edit Project Form -->
+  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-8">
+    <h2 class="text-xl font-semibold mb-4">{{ isEditing ? 'Edit Project' : 'Add New Project' }}</h2>
+    
+    <form (ngSubmit)="onSubmit()" [formGroup]="projectForm" class="mb-4" enctype="multipart/form-data">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
+            Project Title
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="title"
+            type="text"
+            placeholder="Project title"
+            formControlName="title">
+        </div>
+        
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="featured">
+            Featured Project
+          </label>
+          <select
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="featured"
+            formControlName="featured">
+            <option [value]="true">Yes</option>
+            <option [value]="false">No</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
+          Description
+        </label>
+        <textarea
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="description"
+          rows="3"
+          placeholder="Project description"
+          formControlName="description"></textarea>
+      </div>
+      
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="tags">
+          Tags (comma separated)
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="tags"
+          type="text"
+          placeholder="Angular, Node.js, MongoDB"
+          formControlName="tags">
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="repoUrl">
+            Repository URL
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="repoUrl"
+            type="text"
+            placeholder="https://github.com/username/project"
+            formControlName="repoUrl">
+        </div>
+        
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="liveUrl">
+            Live Demo URL
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="liveUrl"
+            type="text"
+            placeholder="https://project-demo.com"
+            formControlName="liveUrl">
+        </div>
+      </div>
+      
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="images">
+          Image URLs (comma separated)
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="images"
+          type="text"
+          placeholder="https://example.com/image1.jpg, https://example.com/image2.jpg"
+          formControlName="images">
+      </div>
+      
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="imageUpload">
+          Upload Images
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="imageUpload"
+          type="file"
+          multiple
+          (change)="onFileSelected($event)">
+        <div class="mt-2" *ngIf="selectedFiles.length > 0">
+          <p class="text-sm text-gray-600">Selected files:</p>
+          <ul class="list-disc pl-5 mt-1">
+            <li *ngFor="let file of selectedFiles" class="text-sm">{{ file.name }}</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="flex items-center justify-between">
+        <button
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          type="submit"
+          [disabled]="projectForm.invalid || isUploading">
+          <span *ngIf="!isUploading">{{ isEditing ? 'Update Project' : 'Add Project' }}</span>
+          <span *ngIf="isUploading">Uploading...</span>
+        </button>
+        
+        <button
+          *ngIf="isEditing"
+          class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2"
+          type="button"
+          (click)="cancelEdit()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+  
+  <!-- Projects List -->
+  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8">
+    <h2 class="text-xl font-semibold mb-4">Current Projects</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div 
+        *ngFor="let project of projects" 
+        class="border rounded-lg overflow-hidden">
+        <div class="bg-gray-200 border-2 border-dashed w-full h-40" *ngIf="!project.images || project.images.length === 0; else projectImages"></div>
+        <ng-template #projectImages>
+          <img [src]="project.images[0]" alt="{{ project.title }}" class="w-full h-40 object-cover">
+        </ng-template>
+        <div class="p-4">
+          <h3 class="text-lg font-bold mb-1">{{ project.title }}</h3>
+          <p class="text-gray-600 text-sm mb-3">{{ project.description | slice:0:100 }}{{ project.description.length > 100 ? '...' : '' }}</p>
+          <div class="flex flex-wrap gap-1 mb-3">
+            <span 
+              class="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-0.5 rounded" 
+              *ngFor="let tag of project.tags">
+              {{ tag }}
+            </span>
+          </div>
+          <div class="flex justify-between">
+            <button
+              class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded text-sm"
+              (click)="editProject(project)">
+              Edit
+            </button>
+            <button
+              class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-sm"
+              (click)="deleteProject(project.id!)">
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

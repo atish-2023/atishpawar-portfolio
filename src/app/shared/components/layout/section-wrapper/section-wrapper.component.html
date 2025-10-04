@@ -1,0 +1,14 @@
+<section 
+  class="section-base"
+  [class]="backgroundColorClass">
+  <div class="container mx-auto px-4 py-16">
+      <div class="text-center mb-16">
+          <h2 class="section-title font-heading">{{ title }}</h2>
+          <div class="section-divider"></div>
+          <p *ngIf="subtitle" class="section-subtitle">
+              {{ subtitle }}
+          </p>
+      </div>
+      <ng-content></ng-content>
+  </div>
+</section>

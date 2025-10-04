@@ -1,0 +1,129 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6">Manage Experience</h1>
+  
+  <!-- Add/Edit Experience Form -->
+  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-8">
+    <h2 class="text-xl font-semibold mb-4">{{ isEditing ? 'Edit Experience' : 'Add New Experience' }}</h2>
+    
+    <form (ngSubmit)="onSubmit()" [formGroup]="experienceForm" class="mb-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="company">
+            Company
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="company"
+            type="text"
+            placeholder="Company name"
+            formControlName="company">
+        </div>
+        
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="role">
+            Role
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="role"
+            type="text"
+            placeholder="Your role"
+            formControlName="role">
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="period">
+            Period
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="period"
+            type="text"
+            placeholder="e.g., 2020 - Present"
+            formControlName="period">
+        </div>
+      </div>
+      
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
+          Description
+        </label>
+        <textarea
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="description"
+          rows="3"
+          placeholder="Job responsibilities and achievements"
+          formControlName="description"></textarea>
+      </div>
+      
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="technologies">
+          Technologies (comma separated)
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="technologies"
+          type="text"
+          placeholder="Angular, Node.js, MongoDB"
+          formControlName="technologies">
+      </div>
+      
+      <div class="flex items-center justify-between">
+        <button
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          type="submit"
+          [disabled]="experienceForm.invalid">
+          {{ isEditing ? 'Update Experience' : 'Add Experience' }}
+        </button>
+        
+        <button
+          *ngIf="isEditing"
+          class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2"
+          type="button"
+          (click)="cancelEdit()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+  
+  <!-- Experience List -->
+  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8">
+    <h2 class="text-xl font-semibold mb-4">Work Experience</h2>
+    
+    <div class="space-y-6">
+      <div 
+        *ngFor="let exp of experiences" 
+        class="border rounded-lg p-4">
+        <div class="flex justify-between items-start">
+          <div>
+            <h3 class="text-lg font-bold">{{ exp.role }}</h3>
+            <p class="text-gray-700">{{ exp.company }} | {{ exp.period }}</p>
+            <p class="text-gray-600 mt-2">{{ exp.description }}</p>
+            <div class="flex flex-wrap gap-1 mt-2">
+              <span 
+                class="bg-gray-100 text-gray-800 text-xs font-semibold px-2 py-0.5 rounded" 
+                *ngFor="let tech of exp.technologies">
+                {{ tech }}
+              </span>
+            </div>
+          </div>
+          <div class="flex space-x-2">
+            <button
+              class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded text-sm"
+              (click)="editExperience(exp)">
+              Edit
+            </button>
+            <button
+              class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-sm"
+              (click)="deleteExperience(exp.id!)">
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

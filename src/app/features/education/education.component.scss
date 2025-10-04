@@ -1,0 +1,19 @@
+// Education section specific styles
+// Glassmorphism effect for education cards
+.glassmorphism {
+  background: rgba(30, 41, 59, 0.3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  background: #334155;
+  left: 0;
+  top: 16px;
+}

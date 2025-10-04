@@ -1,0 +1,19 @@
+<div 
+  class="card-base"
+  [class.glassmorphism]="config?.hasGlassmorphism"
+  [class.gradient-border]="config?.hasGradientBorder"
+  [ngClass]="config?.customClasses || ''">
+  <ng-container *ngIf="config && config.title">
+    <h3 class="card-title">{{ config.title }}</h3>
+  </ng-container>
+  
+  <ng-container *ngIf="config && config.subtitle">
+    <p class="card-subtitle">{{ config.subtitle }}</p>
+  </ng-container>
+  
+  <ng-container *ngIf="config && config.content">
+    <p class="card-content">{{ config.content }}</p>
+  </ng-container>
+  
+  <ng-content></ng-content>
+</div>

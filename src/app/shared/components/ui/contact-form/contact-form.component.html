@@ -1,0 +1,46 @@
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="space-y-6">
+  <div>
+    <label for="name" class="block text-sm font-medium text-text-secondary mb-2">Full Name</label>
+    <input 
+      type="text" 
+      id="name" 
+      formControlName="name"
+      class="bg-slate-900/50 backdrop-blur border border-slate-700/50 text-text-primary p-3 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/30 block w-full transition duration-300 placeholder-text-secondary/70" 
+      placeholder="Your full name">
+  </div>
+  <div>
+    <label for="email" class="block text-sm font-medium text-text-secondary mb-2">Email Address</label>
+    <input 
+      type="email" 
+      id="email" 
+      formControlName="email"
+      class="bg-slate-900/50 backdrop-blur border border-slate-700/50 text-text-primary p-3 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/30 block w-full transition duration-300 placeholder-text-secondary/70" 
+      placeholder="your.email@example.com">
+  </div>
+  <div>
+    <label for="subject" class="block text-sm font-medium text-text-secondary mb-2">Subject</label>
+    <input 
+      type="text" 
+      id="subject" 
+      formControlName="subject"
+      class="bg-slate-900/50 backdrop-blur border border-slate-700/50 text-text-primary p-3 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/30 block w-full transition duration-300 placeholder-text-secondary/70" 
+      placeholder="What is this regarding?">
+  </div>
+  <div>
+    <label for="message" class="block text-sm font-medium text-text-secondary mb-2">Message</label>
+    <textarea 
+      id="message" 
+      rows="5" 
+      formControlName="message"
+      class="bg-slate-900/50 backdrop-blur border border-slate-700/50 text-text-primary p-3 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/30 block w-full transition duration-300 placeholder-text-secondary/70" 
+      placeholder="Your message here..."></textarea>
+  </div>
+  <div>
+    <button 
+      type="submit" 
+      [disabled]="contactForm.invalid"
+      class="w-full bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary text-neutral font-bold py-3 px-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed">
+      Send Message
+    </button>
+  </div>
+</form>

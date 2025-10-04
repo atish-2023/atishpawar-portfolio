@@ -1,0 +1,20 @@
+<section id="education" class="py-20 bg-slate-900">
+  <app-section-wrapper 
+    title="Education" 
+    subtitle="My academic journey and qualifications"
+    backgroundColor="slate-900">
+    <div class="max-w-4xl mx-auto">
+      <div class="relative">
+        <!-- Timeline line -->
+        <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-primary/50 to-secondary/50"></div>
+        
+        <div class="space-y-12">
+          <app-timeline-item 
+            *ngFor="let item of educationItems; let i = index" 
+            [item]="item">
+          </app-timeline-item>
+        </div>
+      </div>
+    </div>
+  </app-section-wrapper>
+</section>

@@ -1,0 +1,24 @@
+<section id="projects" class="py-20 bg-slate-900">
+  <app-section-wrapper 
+    title="Projects" 
+    subtitle="Explore my latest projects and see how I've brought ideas to life"
+    backgroundColor="slate-900">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <app-project-card 
+        *ngFor="let project of projects" 
+        [project]="project"
+        class="transform transition-all duration-300 hover:-translate-y-2">
+      </app-project-card>
+    </div>
+    
+    <div class="mt-12 text-center">
+      <a href="#" 
+         class="inline-flex items-center bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary text-neutral font-bold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+        View All Projects
+        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+        </svg>
+      </a>
+    </div>
+  </app-section-wrapper>
+</section>

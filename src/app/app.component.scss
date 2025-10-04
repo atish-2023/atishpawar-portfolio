@@ -1,0 +1,45 @@
+/* Hero Section */
+#hero {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #0f172a, #1e293b);
+}
+
+/* About Section */
+#about {
+  background-color: #f3f4f6;
+}
+
+/* Skills Section */
+#skills .grid-cols-1 > div,
+#skills .grid-cols-2 > div,
+#skills .grid-cols-4 > div {
+  transition: all 0.3s ease;
+}
+
+#skills .grid-cols-1 > div:hover,
+#skills .grid-cols-2 > div:hover,
+#skills .grid-cols-4 > div:hover {
+  transform: translateY(-5px);
+}
+
+/* Projects Section */
+#projects {
+  background-color: #f3f4f6;
+}
+
+#projects .grid-cols-1 > div,
+#projects .grid-cols-2 > div,
+#projects .grid-cols-3 > div {
+  transition: all 0.3s ease;
+}
+
+#projects .grid-cols-1 > div:hover,
+#projects .grid-cols-2 > div:hover,
+#projects .grid-cols-3 > div:hover {
+  transform: translateY(-5px);
+}
+
+/* Education Section */
+#education {
+  background: linear-gradient(to bottom right, #0f172a, #1e293b);
+}

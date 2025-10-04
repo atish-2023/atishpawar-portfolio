@@ -1,0 +1,95 @@
+@use './variables' as *;
+
+// Glassmorphism effect
+@mixin glassmorphism($bg-color: rgba(30, 41, 59, 0.4), $border-color: rgba(255, 255, 255, 0.1)) {
+  background: $bg-color;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid $border-color;
+}
+
+// Glassmorphism dark variant
+@mixin glassmorphism-dark($bg-color: rgba(15, 23, 42, 0.6), $border-color: rgba(255, 255, 255, 0.05)) {
+  background: $bg-color;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid $border-color;
+}
+
+// Gradient border effect
+@mixin gradient-border($border-width: 2px) {
+  position: relative;
+  background: linear-gradient($dark-bg, $dark-bg) padding-box,
+              $primary-gradient border-box;
+  border: $border-width solid transparent;
+}
+
+// Gradient text effect
+@mixin gradient-text {
+  background: $primary-gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// Dark gradient text effect
+@mixin dark-gradient-text {
+  background: $accent-gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// Responsive breakpoints
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == 'sm' {
+    @media (min-width: $breakpoint-sm) {
+      @content;
+    }
+  }
+  @if $breakpoint == 'md' {
+    @media (min-width: $breakpoint-md) {
+      @content;
+    }
+  }
+  @if $breakpoint == 'lg' {
+    @media (min-width: $breakpoint-lg) {
+      @content;
+    }
+  }
+  @if $breakpoint == 'xl' {
+    @media (min-width: $breakpoint-xl) {
+      @content;
+    }
+  }
+  @if $breakpoint == '2xl' {
+    @media (min-width: $breakpoint-2xl) {
+      @content;
+    }
+  }
+}
+
+// Card hover effect
+@mixin card-hover($scale: 1.03, $translate-y: -5px) {
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY($translate-y) scale($scale);
+    @content;
+  }
+}
+
+// Input dark style
+@mixin input-dark {
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: $text-light;
+  
+  &:focus {
+    background: rgba(30, 41, 59, 0.7);
+    border-color: $primary-color;
+    outline: none;
+  }
+  
+  &::placeholder {
+    color: $text-muted;
+  }
+}

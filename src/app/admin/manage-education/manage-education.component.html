@@ -1,0 +1,110 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6">Manage Education</h1>
+  
+  <!-- Add/Edit Education Form -->
+  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-8">
+    <h2 class="text-xl font-semibold mb-4">{{ isEditing ? 'Edit Education' : 'Add New Education' }}</h2>
+    
+    <form (ngSubmit)="onSubmit()" [formGroup]="educationForm" class="mb-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="institution">
+            Institution
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="institution"
+            type="text"
+            placeholder="Institution name"
+            formControlName="institution">
+        </div>
+        
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="degree">
+            Degree
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="degree"
+            type="text"
+            placeholder="Degree title"
+            formControlName="degree">
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="period">
+            Period
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="period"
+            type="text"
+            placeholder="e.g., 2014 - 2016"
+            formControlName="period">
+        </div>
+      </div>
+      
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
+          Description
+        </label>
+        <textarea
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="description"
+          rows="3"
+          placeholder="Additional details about your education"
+          formControlName="description"></textarea>
+      </div>
+      
+      <div class="flex items-center justify-between">
+        <button
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          type="submit"
+          [disabled]="educationForm.invalid">
+          {{ isEditing ? 'Update Education' : 'Add Education' }}
+        </button>
+        
+        <button
+          *ngIf="isEditing"
+          class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2"
+          type="button"
+          (click)="cancelEdit()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+  
+  <!-- Education List -->
+  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8">
+    <h2 class="text-xl font-semibold mb-4">Education History</h2>
+    
+    <div class="space-y-6">
+      <div 
+        *ngFor="let edu of education" 
+        class="border rounded-lg p-4">
+        <div class="flex justify-between items-start">
+          <div>
+            <h3 class="text-lg font-bold">{{ edu.degree }}</h3>
+            <p class="text-gray-700">{{ edu.institution }} | {{ edu.period }}</p>
+            <p class="text-gray-600 mt-2">{{ edu.description }}</p>
+          </div>
+          <div class="flex space-x-2">
+            <button
+              class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded text-sm"
+              (click)="editEducation(edu)">
+              Edit
+            </button>
+            <button
+              class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-sm"
+              (click)="deleteEducation(edu.id!)">
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
