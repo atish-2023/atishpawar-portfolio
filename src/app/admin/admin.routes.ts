@@ -1,12 +1,13 @@
 import { Routes } from '@angular/router';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { EditHeroComponent } from './edit-hero/edit-hero.component';
 import { EditAboutComponent } from './edit-about/edit-about.component';
 import { ManageSkillsComponent } from './manage-skills/manage-skills.component';
 import { ManageProjectsComponent } from './manage-projects/manage-projects.component';
 import { ManageExperienceComponent } from './manage-experience/manage-experience.component';
 import { ManageEducationComponent } from './manage-education/manage-education.component';
+import { ManageCertificationComponent } from './manage-certification/manage-certification.component';
+import { ManageContactusComponent } from './manage-contactus/manage-contactus.component';
 
 export const ADMIN_ROUTES: Routes = [
   {
@@ -17,10 +18,6 @@ export const ADMIN_ROUTES: Routes = [
   {
     path: 'dashboard',
     component: AdminDashboardComponent
-  },
-  {
-    path: 'login',
-    component: AdminLoginComponent
   },
   {
     path: 'hero',
@@ -45,5 +42,13 @@ export const ADMIN_ROUTES: Routes = [
   {
     path: 'education',
     component: ManageEducationComponent
+  },
+  {
+    path: 'certification',
+    component: ManageCertificationComponent
+  },
+  {
+    path: 'contactus',
+    component: ManageContactusComponent
   }
 ];

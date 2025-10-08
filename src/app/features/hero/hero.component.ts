@@ -5,7 +5,7 @@ import { CardComponent } from '../../shared/components/ui/card/card.component';
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [CommonModule, CardComponent],
+  imports: [CommonModule],
   templateUrl: './hero.component.html',
   styleUrls: ['./hero.component.scss']
 })

@@ -1,20 +1,19 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { LandingPageComponent } from './features/landing-page/landing-page.component';
+import { NavbarComponent } from './shared/components/layout/navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterModule, LandingPageComponent],
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    NavbarComponent
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title = 'personalPortfolio';
-
-  scrollToSection(sectionId: string): void {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  }
 }

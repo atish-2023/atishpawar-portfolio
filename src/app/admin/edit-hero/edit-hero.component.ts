@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ApiService, Hero } from '../../core/api.service';
 
 @Component({
   selector: 'app-edit-hero',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './edit-hero.component.html',
   styleUrls: ['./edit-hero.component.scss']
 })
 export class EditHeroComponent implements OnInit {
   heroForm: FormGroup;
+  isSubmitted = false;
+  submitError = false;
 
   constructor(
     private fb: FormBuilder,
@@ -34,6 +37,9 @@ export class EditHeroComponent implements OnInit {
 
   onSubmit(): void {
     if (this.heroForm.valid) {
+      this.isSubmitted = false;
+      this.submitError = false;
+      
       const hero: Hero = {
         ...this.heroForm.value,
         updatedAt: Date.now()
@@ -42,10 +48,12 @@ export class EditHeroComponent implements OnInit {
       this.apiService.updateHero(hero).subscribe({
         next: (updatedHero) => {
           console.log('Hero updated successfully', updatedHero);
+          this.isSubmitted = true;
           // Show success message to user
         },
         error: (error) => {
           console.error('Error updating hero', error);
+          this.submitError = true;
           // Show error message to user
         }
       });

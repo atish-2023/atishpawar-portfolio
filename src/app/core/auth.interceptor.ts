@@ -14,20 +14,8 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(req);
     }
 
-    // Get the auth token
-    return from(this.authService.getToken()).pipe(
-      switchMap(token => {
-        // Clone the request and add the authorization header if token exists
-        if (token) {
-          const authReq = req.clone({
-            headers: req.headers.set('Authorization', `Bearer ${token}`)
-          });
-          return next.handle(authReq);
-        }
-        
-        // If no token, proceed with original request
-        return next.handle(req);
-      })
-    );
+    // For now, we're not using token-based auth, so just pass through the request
+    // In a real application, you might want to implement proper token handling
+    return next.handle(req);
   }
 }

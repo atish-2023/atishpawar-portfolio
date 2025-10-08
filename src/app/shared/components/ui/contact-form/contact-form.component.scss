@@ -21,3 +21,19 @@
 .focus\:ring-indigo-500:focus {
   --tw-ring-color: #6366f1;
 }
+
+// Fade in and out animation
+.animate-fade-in-out {
+  animation: fadeInOut 0.3s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

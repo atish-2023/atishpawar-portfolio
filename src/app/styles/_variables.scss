@@ -1,18 +1,20 @@
 // Color Palette
-$primary-color: #38BDF8; // cyan
-$secondary-color: #6366F1; // indigo
-$accent-color: #6366F1; // indigo
-$dark-bg: #0F172A; // dark base
+$primary-color: #38BDF8; // Electric Blue
+$secondary-color: #6366F1; // Indigo
+$accent-color: #8B5CF6; // Violet
+$dark-bg: #0F172A; // Very dark gray
 $dark-bg-alt: #1e293b;
 $dark-bg-card: #1e293b;
-$text-light: #F8FAFC; // primary white
-$text-muted: #94A3B8; // secondary text
-$text-dark: #0F172A; // dark base
+$text-light: #F8FAFC; // Light gray/White
+$text-muted: #94A3B8; // Light gray
+$text-dark: #0F172A; // Very dark gray
 
 // Gradient Colors
-$primary-gradient: linear-gradient(45deg, $primary-color, $secondary-color);
+$primary-gradient: linear-gradient(135deg, $primary-color, $secondary-color);
 $secondary-gradient: linear-gradient(135deg, $dark-bg 0%, $dark-bg-alt 100%);
-$accent-gradient: linear-gradient(45deg, $accent-color, $secondary-color);
+$accent-gradient: linear-gradient(135deg, $accent-color, $secondary-color);
+
+
 
 // Spacing
 $spacing-xs: 0.25rem;

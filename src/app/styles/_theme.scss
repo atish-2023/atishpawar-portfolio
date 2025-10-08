@@ -10,6 +10,66 @@
   background: linear-gradient(135deg, $dark-bg-alt 0%, #334155 100%);
 }
 
+// Neon text effect
+.neon-text {
+  color: $primary-color;
+  text-shadow: 0 0 5px rgba($primary-color, 0.5),
+               0 0 10px rgba($primary-color, 0.3),
+               0 0 15px rgba($primary-color, 0.2);
+}
+
+// Glowing button
+.glowing-btn {
+  position: relative;
+  overflow: hidden;
+  border: none;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+  }
+  
+  &:hover::before {
+    left: 100%;
+  }
+  
+  &:hover {
+    @include neon-glow($primary-color, 0.7);
+    transform: translateY(-2px);
+  }
+}
+
+// Animated progress bar
+.animated-progress {
+  height: 10px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    border-radius: 5px;
+    background: $primary-gradient;
+    animation: progress-animation 2s ease-in-out forwards;
+  }
+}
+
+@keyframes progress-animation {
+  0% { width: 0; }
+  100% { width: var(--progress-width); }
+}
+
 // Navigation styles
 .nav-solid {
   background: rgba($dark-bg, 0.95);
@@ -49,12 +109,14 @@
 .skill-card {
   @include card-hover(-5px, 1.05) {
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba($primary-color, 0.2);
   }
 }
 
 // Project card hover effect
 .project-card {
-  @include card-hover(1.03, 0) {
+  @include card-hover(1.03, -5px) {
     box-shadow: $shadow-xl;
+    border: 1px solid rgba($primary-color, 0.2);
   }
 }

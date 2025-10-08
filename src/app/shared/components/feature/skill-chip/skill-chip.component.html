@@ -1,16 +1,24 @@
-<div class="skill-card bg-slate-800/50 backdrop-blur-sm rounded-2xl shadow-lg p-6 text-center h-full transition-all duration-300 border border-slate-700/30 hover:border-primary/50 hover:shadow-xl">
+<div class="skill-card relative group">
+  <!-- Glowing border effect -->
+  <div class="absolute -inset-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-2xl blur opacity-0 group-hover:opacity-70 transition-opacity duration-500"></div>
+  
+  <!-- Main card with glassmorphism effect -->
+  <div class="relative bg-slate-800/60 backdrop-blur-lg rounded-2xl shadow-2xl p-6 h-full border border-slate-700/50 transition-all duration-500 hover:border-slate-600/80">
     <div class="flex justify-center mb-6">
-        <div class="bg-gradient-to-br from-primary/20 to-secondary/20 p-4 rounded-2xl">
-            <i class="fas fa-laptop-code text-3xl text-primary"></i>
-        </div>
+      <div class="bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-cyan-500/20 p-4 rounded-2xl backdrop-blur-sm border border-slate-700/30">
+        <i class="fas fa-laptop-code text-3xl bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400"></i>
+      </div>
     </div>
-    <h3 class="text-xl font-bold text-text-primary mb-3 font-heading">{{ skill.name }}</h3>
-    <p class="text-text-secondary mb-4 text-sm">{{ skill.category }}</p>
+    
+    <h3 class="text-xl font-bold text-slate-100 mb-3 text-center">{{ skill.name }}</h3>
+    <p class="text-slate-400 mb-4 text-sm text-center">{{ skill.category }}</p>
+    
     <div class="flex flex-wrap justify-center gap-2">
-        <span 
-          class="bg-primary/20 text-primary text-xs font-semibold px-3 py-1 rounded-full hover:bg-primary/30 transition-colors duration-300" 
-          *ngFor="let tech of skill.technologies">
-          {{ tech }}
-        </span>
+      <span 
+        class="bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700/30 hover:from-blue-500/30 hover:to-purple-500/30 transition-all duration-300" 
+        *ngFor="let tech of skill.technologies">
+        {{ tech }}
+      </span>
     </div>
+  </div>
 </div>

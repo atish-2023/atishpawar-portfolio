@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 
@@ -27,6 +27,7 @@ export class ContactFormComponent {
   @Output() formSubmit = new EventEmitter<ContactFormData>();
   
   contactForm: FormGroup;
+  showScrollTop = false;
 
   constructor(private fb: FormBuilder) {
     this.contactForm = this.fb.group({
@@ -34,6 +35,20 @@ export class ContactFormComponent {
       email: ['', [Validators.required, Validators.email]],
       subject: ['', Validators.required],
       message: ['', Validators.required]
+    });
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll() {
+    // Show scroll to top button when scrolled down 300px
+    this.showScrollTop = window.scrollY > 300;
+  }
+
+  scrollToTop() {
+    // Smooth scroll to top
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
     });
   }
 

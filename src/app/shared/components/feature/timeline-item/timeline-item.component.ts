@@ -28,4 +28,8 @@ export class TimelineItemComponent {
   get hasTechnologies(): boolean {
     return !!(this.item.technologies && this.item.technologies.length > 0);
   }
+  
+  get hasImage(): boolean {
+    return !!this.item.image;
+  }
 }

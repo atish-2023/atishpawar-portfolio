@@ -59,11 +59,22 @@ export interface Education {
   description: string;
 }
 
+export interface Certification {
+  id?: string;
+  name: string;
+  issuer: string;
+  date: string;
+  description: string;
+  link: string;
+}
+
 export interface ContactMessage {
+  id?: string;
   name: string;
   email: string;
   subject: string;
   message: string;
+  timestamp: number;
 }
 
 @Injectable({
@@ -151,6 +162,14 @@ export class ApiService {
 
   getEducation(): Observable<Education[]> {
     return this.http.get<Education[]>(`${this.apiUrl}/education`);
+  }
+
+  getCertifications(): Observable<Certification[]> {
+    return this.http.get<Certification[]>(`${this.apiUrl}/certifications`);
+  }
+
+  getContactMessages(): Observable<ContactMessage[]> {
+    return this.http.get<ContactMessage[]>(`${this.apiUrl}/contact-messages`);
   }
 
   // Contact form submission
@@ -257,6 +276,22 @@ export class ApiService {
 
   deleteEducation(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/education/${id}`);
+  }
+
+  createCertification(certification: Certification): Observable<Certification> {
+    return this.http.post<Certification>(`${this.apiUrl}/certifications`, certification);
+  }
+
+  updateCertification(id: string, certification: Certification): Observable<Certification> {
+    return this.http.patch<Certification>(`${this.apiUrl}/certifications/${id}`, certification);
+  }
+
+  deleteCertification(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/certifications/${id}`);
+  }
+
+  deleteContactMessage(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/contact-messages/${id}`);
   }
 
   // Cache invalidation for all data

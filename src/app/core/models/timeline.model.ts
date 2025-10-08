@@ -9,4 +9,5 @@ export interface TimelineItem {
   bgColor?: string;
   technologies?: string[];
   isLeftAligned?: boolean;
+  image?: string;
 }

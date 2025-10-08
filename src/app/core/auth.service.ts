@@ -1,102 +1,75 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-
-// We'll implement Firebase authentication methods here
-// For now, we'll create a mock implementation that can be replaced with actual Firebase integration
-
-export interface User {
-  uid: string;
-  email: string;
-  displayName: string;
-  photoURL: string;
-  isAdmin: boolean;
-}
+import { Firestore, collection, query, where, getDocs, doc, setDoc } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private currentUserSubject = new BehaviorSubject<User | null>(null);
-  public currentUser$ = this.currentUserSubject.asObservable();
+  private isAuthenticated = false;
 
-  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
-  public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
-
-  private isAdminSubject = new BehaviorSubject<boolean>(false);
-  public isAdmin$ = this.isAdminSubject.asObservable();
-
-  constructor() {
-    // Check if user is already logged in (from localStorage, etc.)
-    this.checkAuthState();
+  constructor(
+    private firestore: Firestore,
+    private router: Router
+  ) {
+    console.log('AuthService initialized');
   }
 
-  private checkAuthState(): void {
-    // In a real implementation, this would check Firebase auth state
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      const user: User = JSON.parse(storedUser);
-      this.currentUserSubject.next(user);
-      this.isAuthenticatedSubject.next(true);
-      this.isAdminSubject.next(user.isAdmin || false);
+  async login(email: string, password: string): Promise<{ success: boolean; message?: string }> {
+    try {
+      console.log('Attempting login with:', email);
+      const adminCollection = collection(this.firestore, 'adminlogin');
+      const q = query(adminCollection, where('email', '==', email), where('password', '==', password));
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        this.isAuthenticated = true;
+        console.log('Login successful');
+        return { success: true };
+      } else {
+        console.log('Invalid credentials');
+        return { success: false, message: 'Invalid credentials. Please try again.' };
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      return { success: false, message: 'An error occurred during login. Please try again.' };
     }
   }
 
-  // Mock login method - replace with actual Firebase authentication
-  login(email: string, password: string): Observable<User> {
-    return new Observable(observer => {
-      // Simulate API call delay
-      setTimeout(() => {
-        // Mock user data - in real implementation, this would come from Firebase
-        const user: User = {
-          uid: 'mock-uid-123',
-          email: email,
-          displayName: 'Atish Pawar',
-          photoURL: '',
-          isAdmin: true // For demo purposes, assume all logins are admin
-        };
+  async initializeAdminUser(): Promise<void> {
+    try {
+      console.log('Initializing admin user in Firestore');
+      const adminCollection = collection(this.firestore, 'adminlogin');
+      const q = query(adminCollection, where('email', '==', 'atishpawar1193@gmail.com'));
+      const querySnapshot = await getDocs(q);
 
-        // Store user in localStorage for persistence
-        localStorage.setItem('user', JSON.stringify(user));
-        
-        this.currentUserSubject.next(user);
-        this.isAuthenticatedSubject.next(true);
-        this.isAdminSubject.next(user.isAdmin);
-        
-        observer.next(user);
-        observer.complete();
-      }, 500);
-    });
+      if (querySnapshot.empty) {
+        // Create the admin user document if it doesn't exist
+        const adminDoc = doc(this.firestore, 'adminlogin', 'adminUser');
+        await setDoc(adminDoc, {
+          email: 'atishpawar1193@gmail.com',
+          password: 'Shraddhaone@28'
+        });
+        console.log('Admin user created successfully in Firestore');
+      } else {
+        console.log('Admin user already exists in Firestore');
+      }
+    } catch (error) {
+      console.error('Error initializing admin user:', error);
+    }
   }
 
-  // Mock logout method
   logout(): void {
-    // Remove user from localStorage
-    localStorage.removeItem('user');
-    
-    this.currentUserSubject.next(null);
-    this.isAuthenticatedSubject.next(false);
-    this.isAdminSubject.next(false);
+    this.isAuthenticated = false;
+    this.router.navigate(['/auth/login']);
   }
 
-  // Get current user token (for API requests)
-  async getToken(): Promise<string | null> {
-    // In a real implementation, this would get the Firebase ID token
-    const user = this.currentUserSubject.value;
-    if (user) {
-      // Mock token - in real implementation, use Firebase getIdToken()
-      return 'mock-firebase-token-123';
-    }
-    return null;
+  isLoggedIn(): boolean {
+    return this.isAuthenticated;
   }
 
-  // Check if user is admin
-  isAdmin(): boolean {
-    const user = this.currentUserSubject.value;
-    return user ? user.isAdmin : false;
-  }
-
-  // Get current user
-  getCurrentUser(): User | null {
-    return this.currentUserSubject.value;
+  getToken(): Promise<string | null> {
+    // For now, return null as we're not using token-based auth
+    return Promise.resolve(null);
   }
 }

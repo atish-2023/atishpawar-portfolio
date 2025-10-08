@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SkillChipComponent } from '../../shared/components/feature/skill-chip/skill-chip.component';
-import { SectionWrapperComponent } from '../../shared/components/layout/section-wrapper/section-wrapper.component';
 
 interface Skill {
   name: string;
@@ -12,11 +11,11 @@ interface Skill {
 @Component({
   selector: 'app-skills',
   standalone: true,
-  imports: [CommonModule, SkillChipComponent, SectionWrapperComponent],
+  imports: [CommonModule, SkillChipComponent],
   templateUrl: './skills.component.html',
   styleUrls: ['./skills.component.scss']
 })
-export class SkillsComponent {
+export class SkillsComponent implements AfterViewInit {
   skills: Skill[] = [
     {
       name: 'Frontend',
@@ -39,4 +38,35 @@ export class SkillsComponent {
       technologies: ['Git', 'Docker', 'AWS', 'Firebase', 'Jest', 'Cypress']
     }
   ];
+
+  ngAfterViewInit() {
+    // Animation for skill cards on scroll
+    const skillCards = document.querySelectorAll('.animate-fade-in-up');
+    
+    // Immediately show the first few cards without waiting for intersection
+    skillCards.forEach((card, index) => {
+      if (index < 4) { // Show first row immediately
+        setTimeout(() => {
+          card.classList.remove('opacity-0');
+          card.classList.add('opacity-100');
+          card.classList.add('translate-y-0');
+        }, index * 100);
+      }
+    });
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('opacity-0');
+          entry.target.classList.remove('translate-y-5');
+          entry.target.classList.add('opacity-100');
+          entry.target.classList.add('translate-y-0');
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    skillCards.forEach(card => {
+      observer.observe(card);
+    });
+  }
 }

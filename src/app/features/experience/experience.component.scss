@@ -2,30 +2,25 @@
   background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
 }
 
-.glassmorphism {
-  background: rgba(30, 41, 59, 0.4);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+// Additional glow effect for the timeline image
+.timeline-image-glow {
+  filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.7)) drop-shadow(0 0 20px rgba(139, 92, 246, 0.5));
 }
 
-.timeline-item::before {
-  content: '';
+// Ensure the image fits properly in the timeline
+.timeline-image-container {
   position: absolute;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #3b82f6;
-  left: -8px;
-  top: 0;
-}
-
-.timeline-item::after {
-  content: '';
-  position: absolute;
-  width: 2px;
+  left: 50%;
+  transform: translateX(-50%);
   height: 100%;
-  background: #334155;
-  left: 0;
-  top: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.timeline-image {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
 }

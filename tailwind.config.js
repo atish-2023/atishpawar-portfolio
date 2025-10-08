@@ -8,15 +8,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#38BDF8', // cyan
-        secondary: '#6366F1', // indigo
-        neutral: '#0F172A', // dark base
-        'text-primary': '#F8FAFC', // primary white
-        'text-secondary': '#94A3B8', // secondary text
+        primary: '#3b82f6',
+        secondary: '#8b5cf6',
+        accent: '#6366f1',
+        dark: {
+          900: '#0f172a',
+          800: '#1e293b',
+          700: '#334155',
+          600: '#475569',
+          500: '#64748b',
+        }
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
-        heading: ['Poppins', 'sans-serif'],
       },
     },
   },

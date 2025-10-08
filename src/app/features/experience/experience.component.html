@@ -1,20 +1,26 @@
-<section id="experience" class="py-20 bg-slate-900">
-  <app-section-wrapper 
-    title="Work Experience" 
-    subtitle="My professional journey and the roles that shaped my expertise"
-    backgroundColor="slate-900">
-    <div class="max-w-4xl mx-auto">
-      <div class="relative">
-        <!-- Timeline line -->
-        <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-primary/50 to-secondary/50"></div>
-        
-        <div class="space-y-12">
-          <app-timeline-item 
-            *ngFor="let item of experienceItems; let i = index" 
-            [item]="item">
-          </app-timeline-item>
-        </div>
+<section id="experience" class="py-20 section-alt-bg relative overflow-hidden">
+  <div class="container mx-auto px-4 relative z-10">
+    <!-- Section Heading -->
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Work Experience</h2>
+      <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
+      <p class="mt-6 text-xl text-slate-300 max-w-3xl mx-auto">
+        My professional journey and the roles that shaped my expertise
+      </p>
+    </div>
+
+    <!-- Timeline Container -->
+    <div class="max-w-4xl mx-auto relative">
+      <!-- Glowing timeline line -->
+      <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-pink-500 shadow-[0_0_25px_rgba(59,130,246,0.5)]"></div>
+      
+      <!-- Timeline Items -->
+      <div class="space-y-12 relative z-20">
+        <app-timeline-item 
+          *ngFor="let experience of experiences; let i = index"
+          [item]="experience">
+        </app-timeline-item>
       </div>
     </div>
-  </app-section-wrapper>
+  </div>
 </section>
