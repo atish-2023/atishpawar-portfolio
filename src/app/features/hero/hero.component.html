@@ -1,10 +1,17 @@
-<section id="hero" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-900 via-purple-900 to-black text-white relative overflow-hidden">
+<section id="hero"
+  class="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-900 via-purple-900 to-black text-white relative overflow-hidden">
   <!-- Background effects -->
   <div class="absolute inset-0">
-    <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500 rounded-full mix-blend-soft-light filter blur-3xl opacity-30 animate-blob"></div>
-    <div class="absolute top-1/3 right-1/4 w-72 h-72 bg-purple-500 rounded-full mix-blend-soft-light filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
-    <div class="absolute bottom-1/4 left-1/2 w-60 h-60 bg-pink-500 rounded-full mix-blend-soft-light filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
-    
+    <div
+      class="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500 rounded-full mix-blend-soft-light filter blur-3xl opacity-30 animate-blob">
+    </div>
+    <div
+      class="absolute top-1/3 right-1/4 w-72 h-72 bg-purple-500 rounded-full mix-blend-soft-light filter blur-3xl opacity-30 animate-blob animation-delay-2000">
+    </div>
+    <div
+      class="absolute bottom-1/4 left-1/2 w-60 h-60 bg-pink-500 rounded-full mix-blend-soft-light filter blur-3xl opacity-30 animate-blob animation-delay-4000">
+    </div>
+
     <!-- Floating particles -->
     <div class="absolute inset-0 overflow-hidden">
       <div class="particle particle-1"></div>
@@ -14,72 +21,86 @@
       <div class="particle particle-5"></div>
     </div>
   </div>
-  
-  <div class="container mx-auto px-4 relative z-10">
-    <div class="flex flex-col lg:flex-row items-center justify-between gap-16">
+
+  <div class="container mx-auto px-4 py-12">
+    <div class="flex flex-col-reverse lg:flex-row items-center justify-center md:justify-between gap-10 md:gap-14 lg:gap-16 text-center md:text-center lg:text-left">
+
+
       <!-- Text content -->
       <div class="text-center lg:text-left lg:w-1/2 animate-fade-in-up">
+
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight">
-          Hi, I'm <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 animate-gradient-text">Atish Pawar</span>
+          Hi, I'm <span
+            class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 animate-gradient-text">Atish
+            Pawar</span>
         </h1>
-        
-        <div class="h-20 mb-6">
-          <h2 class="text-2xl md:text-3xl font-semibold typing-animation text-slate-200">Full Stack Developer</h2>
+
+        <div class="h-12 mb-4 sm:h-14 sm:mb-5 md:h-16 md:mb-5 lg:h-20 lg:mb-6">
+          <div class="typing-container">
+            <h2 class="text-2xl md:text-3xl font-semibold text-slate-200 typing-text"></h2>
+            <span class="cursor"></span>
+          </div>
         </div>
-        
+
         <p class="text-xl mb-8 max-w-2xl text-slate-300 font-light">
           Turning ideas into reality through clean, efficient code.
         </p>
-        
+
         <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
           <a href="#projects" class="relative group">
-            <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl blur-lg opacity-70 group-hover:opacity-100 transition duration-300"></div>
-            <div class="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold py-4 px-8 rounded-xl text-lg hover:from-blue-700 hover:to-purple-700 transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-center z-10">
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl blur-lg opacity-70 group-hover:opacity-100 transition duration-300">
+            </div>
+            <div
+              class="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold py-4 px-8 rounded-xl text-lg hover:from-blue-700 hover:to-purple-700 transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-center z-10">
               View My Work
             </div>
           </a>
           <a href="#contact" class="relative group">
-            <div class="absolute inset-0 bg-gradient-to-r from-slate-700 to-slate-800 rounded-xl blur-lg opacity-50 group-hover:opacity-70 transition duration-300"></div>
-            <div class="relative bg-transparent border-2 border-slate-600 text-slate-300 font-bold py-4 px-8 rounded-xl text-lg hover:bg-slate-800/50 transition duration-300 shadow-lg hover:shadow-xl text-center z-10">
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-slate-700 to-slate-800 rounded-xl blur-lg opacity-50 group-hover:opacity-70 transition duration-300">
+            </div>
+            <div
+              class="relative bg-transparent border-2 border-slate-600 text-slate-300 font-bold py-4 px-8 rounded-xl text-lg hover:bg-slate-800/50 transition duration-300 shadow-lg hover:shadow-xl text-center z-10">
               Get In Touch
             </div>
           </a>
         </div>
-        
-        <!-- Tech stack tags -->
-        <div class="mt-2 flex flex-wrap justify-center lg:justify-start gap-3">
-          <span class="bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-200 px-4 py-2 rounded-full text-sm border border-blue-500/30 backdrop-blur-sm">Java</span>
-          <span class="bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-200 px-4 py-2 rounded-full text-sm border border-purple-500/30 backdrop-blur-sm">Angular</span>
-          <span class="bg-gradient-to-r from-indigo-500/20 to-blue-500/20 text-indigo-200 px-4 py-2 rounded-full text-sm border border-indigo-500/30 backdrop-blur-sm">React</span>
-        </div>
+
       </div>
-      
+
       <!-- Profile image area -->
       <div class="lg:w-1/2 flex justify-center animate-fade-in-up" style="animation-delay: 200ms;">
         <div class="relative">
           <!-- Rotating glassmorphism frame -->
-          <div class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 animate-rotate-glow opacity-70 blur-md"></div>
-          <div class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 animate-rotate-glow opacity-50 blur-xl"></div>
-          
+          <div
+            class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 animate-rotate-glow opacity-70 blur-md">
+          </div>
+          <div
+            class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 animate-rotate-glow opacity-50 blur-xl">
+          </div>
+
           <!-- Profile image container -->
-          <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white/10 shadow-2xl backdrop-blur-sm">
-            <div class="bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-dashed rounded-full w-full h-full flex items-center justify-center">
-              <div class="bg-gradient-to-br from-slate-700 to-slate-800 w-56 h-56 md:w-72 md:h-72 rounded-full flex items-center justify-center">
+          <div
+            class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white/10 shadow-2xl backdrop-blur-sm">
+            <div
+              class="bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-dashed rounded-full w-full h-full flex items-center justify-center">
+              <div
+                class="bg-gradient-to-br from-slate-700 to-slate-800 w-56 h-56 md:w-72 md:h-72 rounded-full flex items-center justify-center">
                 <span class="text-4xl text-slate-500">AP</span>
               </div>
             </div>
           </div>
-          
+
           <!-- Open to Work badge -->
-          <div class="absolute -bottom-4 -right-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full font-bold shadow-lg animate-pulse border-2 border-white/20">
+          <div
+            class="absolute -bottom-4 -right-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full font-bold shadow-lg animate-pulse border-2 border-white/20">
             <span class="drop-shadow-md">Open to Work!</span>
           </div>
-          
+
           <!-- Download Resume button -->
           <div class="absolute -bottom-16 -right-4">
-            <a 
-              href="assets/Atish_Pawar_Resume.pdf" 
-              download 
+            <a href="assets/Atish_Pawar_Resume.pdf" download
               class="inline-flex items-center bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-medium py-2 px-4 rounded-full transition duration-300 transform hover:scale-105 shadow-lg hover:shadow-cyan-500/30 border-2 border-white/20">
               <i class="fas fa-download mr-2"></i>
               <span class="drop-shadow-md">Resume</span>
@@ -89,12 +110,13 @@
       </div>
     </div>
   </div>
-  
+
   <!-- Scroll down indicator -->
-  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+  <div class="absolute bottom-8 left-[80%] md:left-[90%] transform -translate-x-1/2 animate-bounce">
     <a href="#about" class="text-slate-300 hover:text-white transition duration-300">
       <div class="relative">
-        <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full blur-md opacity-50"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full blur-md opacity-50">
+        </div>
         <div class="relative w-10 h-10 rounded-full border-2 border-slate-400 flex items-center justify-center">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>

@@ -7,7 +7,6 @@ import { ExperienceComponent } from './features/experience/experience.component'
 import { EducationComponent } from './features/education/education.component';
 import { ContactComponent } from './features/contact/contact.component';
 import { LoginComponent } from './auth/login/login.component';
-import { ADMIN_ROUTES } from './admin/admin.routes';
 import { FirebaseTestComponent } from './firebase-test/firebase-test.component';
 import { FirestoreDebugComponent } from './firestore-debug/firestore-debug.component';
 
@@ -24,7 +23,7 @@ export const routes: Routes = [
   { path: 'firestore-debug', component: FirestoreDebugComponent },
   { 
     path: 'admin', 
-    loadChildren: () => Promise.resolve(ADMIN_ROUTES) 
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   },
   { path: '**', redirectTo: '' }
 ];

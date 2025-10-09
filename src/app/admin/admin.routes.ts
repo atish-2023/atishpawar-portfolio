@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AdminLayoutComponent } from './admin-layout.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { EditHeroComponent } from './edit-hero/edit-hero.component';
 import { EditAboutComponent } from './edit-about/edit-about.component';
@@ -12,43 +13,49 @@ import { ManageContactusComponent } from './manage-contactus/manage-contactus.co
 export const ADMIN_ROUTES: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full'
-  },
-  {
-    path: 'dashboard',
-    component: AdminDashboardComponent
-  },
-  {
-    path: 'hero',
-    component: EditHeroComponent
-  },
-  {
-    path: 'about',
-    component: EditAboutComponent
-  },
-  {
-    path: 'skills',
-    component: ManageSkillsComponent
-  },
-  {
-    path: 'projects',
-    component: ManageProjectsComponent
-  },
-  {
-    path: 'experience',
-    component: ManageExperienceComponent
-  },
-  {
-    path: 'education',
-    component: ManageEducationComponent
-  },
-  {
-    path: 'certification',
-    component: ManageCertificationComponent
-  },
-  {
-    path: 'contactus',
-    component: ManageContactusComponent
+    component: AdminLayoutComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      },
+      {
+        path: 'dashboard',
+        component: AdminDashboardComponent
+      },
+      {
+        path: 'hero',
+        component: EditHeroComponent
+      },
+      {
+        path: 'about',
+        component: EditAboutComponent
+      },
+      {
+        path: 'skills',
+        component: ManageSkillsComponent
+      },
+      {
+        path: 'projects',
+        component: ManageProjectsComponent
+      },
+      {
+        path: 'experience',
+        component: ManageExperienceComponent
+      },
+      {
+        path: 'education',
+        component: ManageEducationComponent
+      },
+      {
+        path: 'certification',
+        component: ManageCertificationComponent
+      },
+      {
+        path: 'contactus',
+        component: ManageContactusComponent
+      }
+    ]
   }
 ];

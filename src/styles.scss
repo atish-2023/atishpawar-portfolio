@@ -39,25 +39,6 @@ body {
     }
   }
   
-  .typing-animation {
-    overflow: hidden;
-    border-right: .15em solid #3b82f6;
-    white-space: nowrap;
-    animation: 
-      typing 3.5s steps(40, end),
-      blink-caret .75s step-end infinite;
-  }
-  
-  @keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-  }
-  
-  @keyframes blink-caret {
-    from, to { border-color: transparent }
-    50% { border-color: #3b82f6; }
-  }
-  
   /* Added missing animations */
   .animate-fade-in-up {
     animation: fadeInUp 0.8s ease-out forwards;
@@ -173,6 +154,29 @@ body {
       transform: translateY(0);
     }
   }
+  
+  // Typing animation container
+  .typing-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  // Cursor for typing animation
+  .cursor {
+    position: absolute;
+    display: inline-block;
+    height: 1em;
+    width: 2px;
+    background-color: #3b82f6;
+    margin-left: 4px;
+    animation: blink 1s infinite;
+    vertical-align: middle;
+  }
+  
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
 }
 
 .nav-solid {
@@ -212,6 +216,9 @@ body {
   outline: none;
 }
 
+.input-dark::placeholder {
+  color: #94a3b8;
+}
 .input-dark::placeholder {
   color: #94a3b8;
 }

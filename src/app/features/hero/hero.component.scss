@@ -3,23 +3,45 @@
   .animate-blob {
     animation: blob 7s infinite;
   }
-  
+
   .animation-delay-2000 {
     animation-delay: 2s;
   }
-  
+
   .animation-delay-4000 {
     animation-delay: 4s;
   }
 }
 
-.typing-animation {
+// Typing animation container
+.typing-container {
+  position: relative;
+  display: inline-block;
+  height: 1.5em; // Fixed height to prevent layout shift
+}
+
+// Typing text
+.typing-text {
+  display: inline-block;
   overflow: hidden;
-  border-right: .15em solid #3b82f6;
   white-space: nowrap;
   animation: 
-    typing 3.5s steps(40, end),
-    blink-caret .75s step-end infinite;
+    typing 3.5s steps(40, end) 1s both;
+}
+
+// Cursor
+.cursor {
+  position: absolute;
+  display: inline-block;
+  height: 2.5em;
+  width: 0.15em;
+  background-color: #3b82f6;
+  margin-left: 0.1em;
+  animation: blink 1s infinite;
+  vertical-align: middle;
+  top: 0;
+  left: 0;
+  transform: translateX(4px);
 }
 
 // Gradient text animation
@@ -27,9 +49,11 @@
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -46,6 +70,7 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -63,6 +88,7 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -77,12 +103,15 @@
   0% {
     transform: translate(0px, 0px) scale(1);
   }
+
   33% {
     transform: translate(30px, -50px) scale(1.1);
   }
+
   66% {
     transform: translate(-20px, 20px) scale(0.9);
   }
+
   100% {
     transform: translate(0px, 0px) scale(1);
   }
@@ -90,13 +119,22 @@
 
 // Typing animation
 @keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
 }
 
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: #3b82f6; }
+// Cursor blink animation
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 // Floating particles
@@ -157,8 +195,153 @@
     transform: translateY(0) translateX(0) rotate(0deg);
     opacity: 1;
   }
+
   100% {
     transform: translateY(-1000%) translateX(1000%) rotate(720deg);
     opacity: 0;
+  }
+}
+
+/* Responsive fixes for hero section */
+
+/* -------- Mobile (max-width: 640px) -------- */
+@media (max-width: 640px) {
+  #hero {
+    padding-top: 7rem;
+    padding-bottom: 5rem;
+    min-height: auto;
+
+  }
+
+  #hero .container {
+    flex-direction: column;
+    gap: 3rem;
+
+  }
+
+  #hero h1 {
+    font-size: 1.75rem;
+    /* Smaller text */
+    line-height: 2.25rem;
+    margin-top: 35px;
+  }
+
+  #hero h2 {
+    font-size: 1.25rem;
+  }
+
+  #hero p {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  #hero .text-center,
+  #hero .text-left {
+    text-align: center;
+  }
+
+  /* Buttons */
+  #hero a div.relative {
+   
+    font-size: 1rem;
+  }
+
+  /* Profile image */
+  #hero .w-64,
+  #hero .h-64 {
+    width: 10rem !important;
+    height: 10rem !important;
+  }
+
+  #hero .md\:w-80,
+  #hero .md\:h-80 {
+    width: 10rem !important;
+    height: 10rem !important;
+  }
+
+  /* Adjust badge & resume button position */
+  #hero .absolute.-bottom-4.-right-4 {
+    bottom: -1rem;
+    right: -1rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  #hero .absolute.-bottom-16.-right-4 {
+ 
+    bottom: -4rem;
+    right: 1.5rem;
+    margin-bottom: 0px
+  }
+
+  /* Particles and blobs - reduce size */
+  .animate-blob {
+    width: 8rem !important;
+    height: 8rem !important;
+    opacity: 0.2 !important;
+  }
+
+  .particle {
+    opacity: 0.3 !important;
+  }
+  
+  // Adjust typing container for mobile
+  .typing-container {
+    height: 1.75em;
+  }
+  
+  .typing-text {
+    font-size: 1.25rem;
+  }
+  
+  .cursor {
+    height: 1.75em;
+  }
+}
+
+/* -------- Tablet (min-width: 641px) and (max-width: 1024px) -------- */
+@media (min-width: 641px) and (max-width: 1024px) {
+  #hero {
+    padding: 6rem 2rem;
+  }
+
+  #hero .container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4rem;
+  }
+
+  #hero h1 {
+    font-size: 2.5rem;
+  }
+
+  #hero h2 {
+    font-size: 1.5rem;
+  }
+
+  #hero p {
+    font-size: 1.1rem;
+    max-width: 36rem;
+  }
+
+  #hero .lg\:w-1\/2 {
+    width: 80%;
+  }
+
+  #hero .absolute.-bottom-4.-right-4 {
+    bottom: -1.2rem;
+    right: -1.2rem;
+    font-size: 0.9rem;
+  }
+
+  #hero .absolute.-bottom-16.-right-4 {
+    bottom: -3.5rem;
+    right: -0.8rem;
+  }
+
+  /* Scale down glowing frame slightly */
+  #hero .animate-rotate-glow {
+    opacity: 0.6;
   }
 }

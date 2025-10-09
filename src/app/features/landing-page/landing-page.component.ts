@@ -8,6 +8,8 @@ import { ExperienceComponent } from '../experience/experience.component';
 import { EducationComponent } from '../education/education.component';
 import { ContactComponent } from '../contact/contact.component';
 import { FooterComponent } from '../../shared/components/layout/footer/footer.component';
+import { CertificationComponent } from "../certification/certification.component";
+import { WorkflowComponent } from "../workflow/workflow.component";
 
 @Component({
   selector: 'app-landing-page',
@@ -21,8 +23,10 @@ import { FooterComponent } from '../../shared/components/layout/footer/footer.co
     ExperienceComponent,
     EducationComponent,
     ContactComponent,
-    FooterComponent
-  ],
+    FooterComponent,
+    CertificationComponent,
+    WorkflowComponent
+],
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss']
 })
