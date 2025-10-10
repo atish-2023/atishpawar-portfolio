@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { NavbarComponent } from './shared/components/layout/navbar/navbar.component';
 
 @Component({
@@ -16,4 +16,10 @@ import { NavbarComponent } from './shared/components/layout/navbar/navbar.compon
 })
 export class AppComponent {
   title = 'personalPortfolio';
+
+  constructor(private router: Router) {}
+
+  isAdminRoute(): boolean {
+    return this.router.url.startsWith('/admin');
+  }
 }
