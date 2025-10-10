@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule, NavigationEnd } from '@angular/router';
+import { AuthService } from '../../../../core/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,10 @@ export class NavbarComponent {
   isMobileMenuOpen = false;
   activeSection = 'hero';
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {
     console.log('Navbar component loaded');
     
     // Add navigation logging
@@ -22,6 +26,10 @@ export class NavbarComponent {
         console.log('Navigation ended to:', event.url);
       }
     });
+  }
+
+  get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 
   toggleMobileMenu() {
