@@ -25,23 +25,21 @@
   display: inline-block;
   overflow: hidden;
   white-space: nowrap;
-  animation: 
-    typing 3.5s steps(40, end) 1s both;
 }
 
 // Cursor
 .cursor {
   position: absolute;
   display: inline-block;
-  height: 2.5em;
+  height: 2.3em;
   width: 0.15em;
+  padding-left: 1px;
   background-color: #3b82f6;
   margin-left: 0.1em;
   animation: blink 1s infinite;
   vertical-align: middle;
-  top: 0;
-  left: 0;
-  transform: translateX(4px);
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 // Gradient text animation
@@ -114,16 +112,6 @@
 
   100% {
     transform: translate(0px, 0px) scale(1);
-  }
-}
-
-// Typing animation
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
   }
 }
 

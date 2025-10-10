@@ -27,6 +27,13 @@ export class NavbarComponent {
   toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
     console.log('Mobile menu toggled, is open:', this.isMobileMenuOpen);
+    
+    // Control body scroll when mobile menu is open
+    if (this.isMobileMenuOpen) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
   }
 
   // Removed scroll listener and related methods to keep navbar always visible

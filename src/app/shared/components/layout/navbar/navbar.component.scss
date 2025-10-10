@@ -2,7 +2,7 @@
 .nav-link {
   color: #cbd5e1; // slate-300
   transition: all 0.3s ease;
-  
+
   &::after {
     content: '';
     position: absolute;
@@ -13,11 +13,11 @@
     background: linear-gradient(to right, #3b82f6, #8b5cf6); // blue-500 to purple-500
     transition: width 0.3s ease;
   }
-  
+
   &:hover {
     color: #fff;
     text-shadow: 0 0 8px rgba(59, 130, 246, 0.5); // blue-500 glow
-    
+
     &::after {
       width: 100%;
     }
@@ -27,7 +27,7 @@
 // Active link indicator
 .nav-link.active {
   color: #fff;
-  
+
   &::after {
     width: 100%;
     background: linear-gradient(to right, #3b82f6, #8b5cf6);
@@ -52,6 +52,7 @@
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -104,4 +105,28 @@
 // Enhanced transition for navbar
 #navbar {
   transition: all 0.3s ease-in-out;
+}
+
+// Mobile menu specific styles
+@media (max-width: 767px) {
+  #mobile-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 100;
+  }
+
+  #mobile-menu a {
+    text-align: left !important;
+  }
+
+  .glassmorphism {
+    margin: 0 auto;
+    width: 600px;
+   background: rgba(0, 0, 0, 1.0);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+    height: 100vh;
+  }
 }

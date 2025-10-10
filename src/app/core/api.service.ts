@@ -57,6 +57,7 @@ export interface Education {
   degree: string;
   period: string;
   description: string;
+  coursework?: string[];
 }
 
 export interface Certification {

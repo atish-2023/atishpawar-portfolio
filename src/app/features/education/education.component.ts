@@ -22,7 +22,13 @@ export class EducationComponent {
       iconColor: 'text-blue-400',
       bgColor: 'bg-gradient-to-br from-blue-500/20 to-blue-600/20',
       isLeftAligned: true,
-      image: '/assets/sppu.png'
+      image: '/assets/sppu.png',
+      coursework: [
+        'Advanced Algorithms and Data Structures',
+        'Distributed Systems Design',
+        'Machine Learning Fundamentals',
+        'Cloud Computing Architecture'
+      ]
     },
     {
       title: 'Bachelor of Computer Science',
@@ -34,7 +40,13 @@ export class EducationComponent {
       iconColor: 'text-purple-400',
       bgColor: 'bg-gradient-to-br from-purple-500/20 to-purple-600/20',
       isLeftAligned: false,
-      image: '/assets/sppu.png'
+      image: '/assets/sppu.png',
+      coursework: [
+        'Web Application Development',
+        'Database Management Systems',
+        'Computer Networks',
+        'Software Engineering Principles'
+      ]
     },
     {
       title: 'Higher Secondary (12th Grade)',

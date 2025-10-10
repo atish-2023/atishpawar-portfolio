@@ -10,4 +10,7 @@ export interface TimelineItem {
   technologies?: string[];
   isLeftAligned?: boolean;
   image?: string;
+  coursework?: string[];
+  achievements?: string[];
+  keyProjects?: string[];
 }

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavbarComponent } from '../../shared/components/layout/navbar/navbar.component';
 import { HeroComponent } from '../hero/hero.component';
 import { AboutComponent } from '../about/about.component';
 import { SkillsComponent } from '../skills/skills.component';
@@ -15,7 +14,6 @@ import { WorkflowComponent } from "../workflow/workflow.component";
   selector: 'app-landing-page',
   standalone: true,
   imports: [
-    NavbarComponent,
     HeroComponent,
     AboutComponent,
     SkillsComponent,

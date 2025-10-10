@@ -10,10 +10,15 @@
   background: linear-gradient(135deg, #0f172a 0%, #312e81 100%);
 }
 
-// Timeline line with glowing gradient
+// Timeline line with glowing gradient - visible only on desktop
 .timeline-line {
   background: linear-gradient(to bottom, #3b82f6, #8b5cf6, #ec4899);
   box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+  
+  // Hide on mobile and tablet
+  @media (max-width: 1023px) {
+    display: none;
+  }
 }
 
 // Fade in up animation

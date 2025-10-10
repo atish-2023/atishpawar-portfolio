@@ -32,4 +32,16 @@ export class TimelineItemComponent {
   get hasImage(): boolean {
     return !!this.item.image;
   }
+  
+  get hasCoursework(): boolean {
+    return !!(this.item.coursework && this.item.coursework.length > 0);
+  }
+  
+  get hasAchievements(): boolean {
+    return !!(this.item.achievements && this.item.achievements.length > 0);
+  }
+  
+  get hasKeyProjects(): boolean {
+    return !!(this.item.keyProjects && this.item.keyProjects.length > 0);
+  }
 }

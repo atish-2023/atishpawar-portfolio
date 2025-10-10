@@ -24,7 +24,8 @@ export class ManageEducationComponent implements OnInit {
       institution: ['', Validators.required],
       degree: ['', Validators.required],
       period: ['', Validators.required],
-      description: ['', Validators.required]
+      description: ['', Validators.required],
+      coursework: ['']
     });
   }
 
@@ -45,7 +46,18 @@ export class ManageEducationComponent implements OnInit {
 
   onSubmit(): void {
     if (this.educationForm.valid) {
-      const educationData: Education = this.educationForm.value;
+      // Process coursework from comma-separated string to array
+      const formValue = { ...this.educationForm.value };
+      if (formValue.coursework) {
+        formValue.coursework = formValue.coursework
+          .split(',')
+          .map((item: string) => item.trim())
+          .filter((item: string) => item.length > 0);
+      } else {
+        formValue.coursework = [];
+      }
+
+      const educationData: Education = formValue;
       
       if (this.isEditing && this.editingEducationId) {
         // Update existing education
@@ -78,7 +90,14 @@ export class ManageEducationComponent implements OnInit {
   editEducation(education: Education): void {
     this.isEditing = true;
     this.editingEducationId = education.id || null;
-    this.educationForm.patchValue(education);
+    
+    // Convert coursework array to comma-separated string for the form
+    const formValue = {
+      ...education,
+      coursework: education.coursework ? education.coursework.join(', ') : ''
+    };
+    
+    this.educationForm.patchValue(formValue);
   }
 
   cancelEdit(): void {

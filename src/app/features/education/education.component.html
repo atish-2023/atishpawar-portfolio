@@ -16,8 +16,8 @@
     
     <div class="max-w-5xl mx-auto">
       <div class="relative">
-        <!-- Glowing timeline line with gradient -->
-        <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-pink-500 shadow-lg shadow-blue-500/30"></div>
+        <!-- Glowing timeline line with gradient - visible only on desktop (1024px and above) -->
+        <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-pink-500 shadow-lg shadow-blue-500/30 hidden lg:block"></div>
         
         <div class="space-y-12">
           <app-timeline-item 
@@ -31,4 +31,3 @@
     </div>
   </div>
 </section>
-
