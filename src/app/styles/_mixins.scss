@@ -59,7 +59,7 @@
 // Gradient border effect
 @mixin gradient-border($border-width: 2px) {
   position: relative;
-  background: linear-gradient($dark-bg, $dark-bg) padding-box,
+  background: linear-gradient(15, 23, 42, 15, 23, 42) padding-box,
               $primary-gradient border-box;
   border: $border-width solid transparent;
   border-radius: 16px;

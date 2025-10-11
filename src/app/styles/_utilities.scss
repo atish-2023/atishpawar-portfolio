@@ -64,9 +64,131 @@
 
 ::-webkit-scrollbar-thumb {
   @include gradient-border(1px);
-  border-radius: $border-radius-full;
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: $primary-gradient;
+}
+
+// Additional custom styles from index.html
+.skill-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+.project-card:hover {
+  transform: scale(1.03);
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: $primary-color;
+  left: -8px;
+  top: 0;
+}
+
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  background: $dark-bg-alt;
+  left: 0;
+  top: 16px;
+}
+
+.nav-solid {
+  background: rgba(15, 23, 42, 0.95);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+
+.nav-transparent {
+  background: transparent;
+  box-shadow: none;
+}
+
+.gradient-border {
+  position: relative;
+  background: linear-gradient($dark-bg, $dark-bg) padding-box,
+              linear-gradient(45deg, $primary-color, $secondary-color) border-box;
+  border: 2px solid transparent;
+}
+
+.gradient-text {
+  background: linear-gradient(45deg, $primary-color, $secondary-color);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dark-gradient-text {
+  background: linear-gradient(45deg, #60a5fa, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-bg {
+  background: linear-gradient(135deg, $dark-bg 0%, $dark-bg-alt 100%);
+}
+
+.section-alt-bg {
+  background: linear-gradient(135deg, $dark-bg-alt 0%, $dark-bg-card 100%);
+}
+
+.input-dark {
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: $text-light;
+}
+
+.input-dark:focus {
+  background: rgba(30, 41, 59, 0.7);
+  border-color: $primary-color;
+  outline: none;
+}
+
+.input-dark::placeholder {
+  color: $text-muted;
+}
+
+/* Added missing animations */
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.animate-on-scroll {
+  transition: all 0.5s ease-out;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
+.translate-y-5 {
+  transform: translateY(1.25rem);
+}
+
+.opacity-100 {
+  opacity: 1;
+}
+
+.translate-y-0 {
+  transform: translateY(0);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -3,7 +3,7 @@ const cors = require('cors');
 const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || 3003; // Changed from 3001 to 3003
+const PORT = process.env.PORT || 3005; // Changed from 3001 to 3005
 
 // Middleware
 app.use(cors());

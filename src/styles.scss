@@ -1,224 +1,136 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* You can add global styles to this file, and also import other style files */
 
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+// Import custom SCSS files
+@use './app/styles/variables' as *;
+@use './app/styles/mixins' as *;
+@use './app/styles/theme' as *;
+@use './app/styles/utilities' as *;
 
-html {
-  scroll-behavior: smooth;
+// Glassmorphism effect
+.glassmorphism {
+  background: rgba(31, 41, 55, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+// Default dark theme (current implementation)
 body {
-  font-family: 'Inter', sans-serif;
+  background-color: #111827;
+  color: #f9fafb;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Global styles from landing page */
-@layer utilities {
-  .animate-blob {
-    animation: blob 7s infinite;
-  }
-  .animation-delay-2000 {
-    animation-delay: 2s;
-  }
-  .animation-delay-4000 {
-    animation-delay: 4s;
-  }
-  @keyframes blob {
-    0% {
-      transform: translate(0px, 0px) scale(1);
-    }
-    33% {
-      transform: translate(30px, -50px) scale(1.1);
-    }
-    66% {
-      transform: translate(-20px, 20px) scale(0.9);
-    }
-    100% {
-      transform: translate(0px, 0px) scale(1);
-    }
+// Light theme styles
+body.light-theme {
+  background-color: #f9fafb;
+  color: #111827;
+  
+  // Update card backgrounds for light theme
+  .glassmorphism {
+    background: rgba(255, 255, 255, 0.8) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
   }
   
-  /* Added missing animations */
-  .animate-fade-in-up {
-    animation: fadeInUp 0.8s ease-out forwards;
+  // Update text colors for light theme
+  .text-slate-100,
+  .text-white {
+    color: #111827 !important;
+  }
+  
+  .text-slate-400 {
+    color: #4b5563 !important;
+  }
+  
+  .text-slate-500 {
+    color: #6b7280 !important;
+  }
+  
+  // Update border colors for light theme
+  .border-gray-700\/50 {
+    border-color: rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  // Update hover states for light theme
+  .hover\:bg-gray-700\/50:hover {
+    background: rgba(0, 0, 0, 0.05) !important;
+  }
+  
+  // Update gradient backgrounds for light theme
+  .bg-gradient-to-br {
+    background: linear-gradient(to bottom right, rgba(249, 250, 251, 0.8), rgba(243, 244, 246, 0.8)) !important;
+  }
+  
+  .bg-gradient-to-r {
+    background: linear-gradient(to right, rgba(249, 250, 251, 0.8), rgba(243, 244, 246, 0.8)) !important;
+  }
+}
+
+// Dark theme styles (default)
+body.dark-theme {
+  background-color: #111827;
+  color: #f9fafb;
+  
+  // Ensure dark theme styles are applied
+  .glassmorphism {
+    background: rgba(31, 41, 55, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+  
+  // Ensure text colors for dark theme
+  .text-slate-100,
+  .text-white {
+    color: #f9fafb !important;
+  }
+  
+  .text-slate-400 {
+    color: #d1d5db !important;
+  }
+  
+  .text-slate-500 {
+    color: #9ca3af !important;
+  }
+  
+  // Ensure border colors for dark theme
+  .border-gray-700\/50 {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+}
+
+// Animated gradient background
+.animate-gradient-bg {
+  background-size: 200% 200%;
+  animation: gradientBG 10s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+// Fade in animation
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+// Fade in up animation
+@keyframes fadeInUp {
+  from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
   }
-  
-  .animate-on-scroll {
-    transition: all 0.5s ease-out;
-  }
-  
-  .opacity-0 {
-    opacity: 0;
-  }
-  
-  .translate-y-5 {
-    transform: translateY(1.25rem);
-  }
-  
-  .opacity-100 {
+  to {
     opacity: 1;
-  }
-  
-  .translate-y-0 {
     transform: translateY(0);
   }
-  
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  // Gradient text animation
-  .animate-gradient-text {
-    background-size: 200% 200%;
-    animation: gradient-text 3s ease infinite;
-  }
-  
-  @keyframes gradient-text {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-  
-  // Rotate glow animation
-  .animate-rotate-glow {
-    animation: rotateGlow 4s linear infinite;
-  }
-  
-  @keyframes rotateGlow {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-  
-  // Glassmorphism effect
-  .glassmorphism {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-  }
-  
-  // Glassmorphism dark variant
-  .glassmorphism-dark {
-    background: rgba(15, 23, 42, 0.6);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-  }
-  
-  // Gradient text effect
-  .gradient-text {
-    background: linear-gradient(45deg, #3b82f6, #8b5cf6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
-  .dark-gradient-text {
-    background: linear-gradient(45deg, #60a5fa, #a78bfa);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
-  // Fade in and out animation
-  .animate-fade-in-out {
-    animation: fadeInOut 0.3s ease-in-out;
-  }
-  
-  @keyframes fadeInOut {
-    0% {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  // Typing animation container
-  .typing-container {
-    position: relative;
-    display: inline-block;
-  }
-  
-  // Cursor for typing animation
-  .cursor {
-    position: absolute;
-    display: inline-block;
-    height: 1em;
-    width: 2px;
-    background-color: #3b82f6;
-    margin-left: 4px;
-    animation: blink 1s infinite;
-    vertical-align: middle;
-  }
-  
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
 }
 
-.nav-solid {
-  background: rgba(15, 23, 42, 0.95);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-}
-
-.nav-transparent {
-  background: transparent;
-  box-shadow: none;
-}
-
-.gradient-border {
-  position: relative;
-  background: linear-gradient(#0f172a, #0f172a) padding-box,
-              linear-gradient(45deg, #3b82f6, #8b5cf6) border-box;
-  border: 2px solid transparent;
-}
-
-.section-bg {
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-}
-
-.section-alt-bg {
-  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-}
-
-.input-dark {
-  background: rgba(30, 41, 59, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #e2e8f0;
-}
-
-.input-dark:focus {
-  background: rgba(30, 41, 59, 0.7);
-  border-color: #3b82f6;
-  outline: none;
-}
-
-.input-dark::placeholder {
-  color: #94a3b8;
-}
-.input-dark::placeholder {
-  color: #94a3b8;
+.animate-fadeInUp {
+  animation: fadeInUp 0.5s ease-out forwards;
 }

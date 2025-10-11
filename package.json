@@ -8,8 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "server": "node server.js",
-    "dev": "concurrently \"ng serve\" \"npm run server\"",
-    "dev:server": "nodemon server.js",
+    "dev": "concurrently \"ng serve --port 4202\" \"npm run server\"",
+    "dev:server": "nodemon server.js --port 3005",
     "lint": "ng lint"
   },
   "private": true,
