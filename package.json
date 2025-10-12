@@ -10,7 +10,10 @@
     "server": "node server.js",
     "dev": "concurrently \"ng serve --port 4202\" \"npm run server\"",
     "dev:server": "nodemon server.js --port 3005",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "deploy": "ng build && firebase deploy",
+    "deploy:rules": "firebase deploy --only firestore:rules",
+    "init-firebase": "node init-firestore-data.js"
   },
   "private": true,
   "dependencies": {
@@ -23,9 +26,11 @@
     "@angular/platform-browser": "^19.0.0",
     "@angular/platform-browser-dynamic": "^19.0.0",
     "@angular/router": "^19.0.0",
+    "canvas-confetti": "^1.9.3",
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "firebase": "^12.3.0",
+    "firebase-admin": "^13.10.1",
     "firebase-tools": "^13.35.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
@@ -35,6 +40,7 @@
     "@angular-devkit/build-angular": "^19.0.0",
     "@angular/cli": "^19.0.0",
     "@angular/compiler-cli": "^19.0.0",
+    "@types/canvas-confetti": "^1.6.4",
     "@types/jasmine": "~5.1.0",
     "angular-eslint": "20.3.0",
     "autoprefixer": "^10.4.16",

@@ -6,17 +6,20 @@
   <div class="relative bg-slate-800/60 backdrop-blur-lg rounded-2xl shadow-2xl p-6 h-full border border-slate-700/50 transition-all duration-500 hover:border-slate-600/80">
     <div class="flex justify-center mb-6">
       <div class="bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-cyan-500/20 p-4 rounded-2xl backdrop-blur-sm border border-slate-700/30">
-        <i class="fas fa-laptop-code text-3xl bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400"></i>
+        <i class="text-3xl bg-clip-text text-transparent" 
+           [ngClass]="getIconClass()" 
+           [class]="getIconBackgroundClass()"></i>
       </div>
     </div>
     
     <h3 class="text-xl font-bold text-slate-100 mb-3 text-center">{{ skill.name }}</h3>
     <p class="text-slate-400 mb-4 text-sm text-center">{{ skill.category }}</p>
     
-    <div class="flex flex-wrap justify-center gap-2">
+    <div class="flex flex-wrap justify-center gap-3">
       <span 
-        class="bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700/30 hover:from-blue-500/30 hover:to-purple-500/30 transition-all duration-300" 
-        *ngFor="let tech of skill.technologies">
+        *ngFor="let tech of skill.technologies; let i = index"
+        class="text-white text-sm font-medium px-3 py-1 rounded-full shadow-md transition duration-300"
+        [ngClass]="getTechTagClass(tech, i)">
         {{ tech }}
       </span>
     </div>

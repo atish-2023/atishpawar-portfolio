@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { Firestore, collection, query, where, getDocs } from '@angular/fire/firestore';
+import { ConfettiService } from '../../core/confetti.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginComponent {
 
   constructor(
     private firestore: Firestore,
-    private router: Router
+    private router: Router,
+    private confettiService: ConfettiService
   ) {}
 
   togglePasswordVisibility(): void {
@@ -74,13 +76,19 @@ export class LoginComponent {
       });
       
       if (!querySnapshot.empty) {
-        // Login successful
-        console.log('Login successful, navigating to admin dashboard');
+        // Login successful - trigger confetti animation
+        console.log('Login successful, triggering confetti animation');
+        this.confettiService.triggerCenterConfetti(3000);
+        
         // Clear input fields
         this.loginData.email = '';
         this.loginData.password = '';
-        // Navigate to admin dashboard
-        this.router.navigate(['/admin/dashboard']);
+        
+        // Navigate to admin dashboard after a short delay to allow confetti to start
+        setTimeout(() => {
+          console.log('Navigating to admin dashboard');
+          this.router.navigate(['/admin/dashboard']);
+        }, 500);
       } else {
         // Invalid credentials
         this.errorMessage = 'Invalid email or password.';

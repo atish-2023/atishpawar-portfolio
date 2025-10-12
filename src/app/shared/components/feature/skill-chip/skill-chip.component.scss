@@ -8,3 +8,34 @@
     }
   }
 }
+
+// Add smooth transition for tech tags
+.skill-card span[class*="bg-"] {
+  transition: all 0.3s ease;
+  cursor: pointer;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+}
+
+// Light theme adjustments
+body.light-theme {
+  .skill-card {
+    .backdrop-blur-lg {
+      background: rgba(255, 255, 255, 0.8) !important;
+      border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    }
+  }
+}
+
+// Dark theme adjustments
+body.dark-theme {
+  .skill-card {
+    .backdrop-blur-lg {
+      background: rgba(31, 41, 55, 0.6) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+  }
+}
