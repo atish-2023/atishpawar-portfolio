@@ -7,8 +7,6 @@ import { ExperienceComponent } from './features/experience/experience.component'
 import { EducationComponent } from './features/education/education.component';
 import { ContactComponent } from './features/contact/contact.component';
 import { LoginComponent } from './auth/login/login.component';
-import { FirebaseTestComponent } from './firebase-test/firebase-test.component';
-import { FirestoreDebugComponent } from './firestore-debug/firestore-debug.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -19,8 +17,6 @@ export const routes: Routes = [
   { path: 'education', component: EducationComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'auth/login', component: LoginComponent },
-  { path: 'firebase-test', component: FirebaseTestComponent },
-  { path: 'firestore-debug', component: FirestoreDebugComponent },
   { 
     path: 'admin', 
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)

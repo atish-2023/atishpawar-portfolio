@@ -3,7 +3,7 @@ const cors = require('cors');
 const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || 3005; // Changed from 3001 to 3005
+const PORT = process.env.PORT || 3008; // Changed to 3008
 
 // Middleware
 app.use(cors());
@@ -31,6 +31,35 @@ let aboutData = {
   content: "I'm a passionate Full Stack Developer with experience in building web applications using modern technologies. I enjoy creating efficient, scalable, and user-friendly solutions. My expertise includes Angular, React, Node.js, Express, MongoDB, and Firebase. I'm always eager to learn new technologies and improve my skills.",
   photoUrl: "",
   updatedAt: Date.now()
+};
+
+let aboutSectionData = {
+  profilePhotoUrl: "https://example.com/myphoto.jpg",
+  title: "I'm Atish Datattray Pawar",
+  content: "I'm a passionate software engineer specialized in building full-stack web applications...",
+  skills: [
+    {
+      name: "Frontend Development",
+      description: "Building responsive and modern UI with Angular, React, and Tailwind CSS."
+    },
+    {
+      name: "Backend Development",
+      description: "Creating scalable REST APIs using Node.js, Express, and Firebase."
+    },
+    {
+      name: "UI/UX Design",
+      description: "Designing user-friendly interfaces with Figma and Adobe XD."
+    },
+    {
+      name: "Cloud Deployment",
+      description: "Deploying and managing applications on Firebase, AWS, and Vercel."
+    }
+  ],
+  stats: {
+    experience: "5+ Years Experience",
+    projects: "20+ Projects Completed",
+    satisfaction: "100% Client Satisfaction"
+  }
 };
 
 let skillsData = [
@@ -125,6 +154,20 @@ app.get('/api/about', (req, res) => {
   res.json(aboutData);
 });
 
+app.get('/api/about-section', (req, res) => {
+  res.json(aboutSectionData);
+});
+
+app.put('/api/about-section', (req, res) => {
+  try {
+    aboutSectionData = { ...req.body };
+    res.json(aboutSectionData);
+  } catch (error) {
+    console.error('Error updating about section:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 app.get('/api/skills', (req, res) => {
   res.json(skillsData);
 });
@@ -143,13 +186,23 @@ app.get('/api/education', (req, res) => {
 
 // Admin routes (protected in real implementation)
 app.put('/api/hero', (req, res) => {
-  heroData = { ...req.body, updatedAt: Date.now() };
-  res.json(heroData);
+  try {
+    heroData = { ...req.body, updatedAt: Date.now() };
+    res.json(heroData);
+  } catch (error) {
+    console.error('Error updating hero:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
 
 app.put('/api/about', (req, res) => {
-  aboutData = { ...req.body, updatedAt: Date.now() };
-  res.json(aboutData);
+  try {
+    aboutData = { ...req.body, updatedAt: Date.now() };
+    res.json(aboutData);
+  } catch (error) {
+    console.error('Error updating about:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
 
 app.post('/api/skills', (req, res) => {

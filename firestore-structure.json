@@ -1,0 +1,265 @@
+{
+  "collections": {
+    "aboutmeinfo": {
+      "description": "Collection containing information about the portfolio owner",
+      "document_structure": {
+        "id": "about1",
+        "fields": {
+          "title": "string",
+          "content": "string",
+          "profilePhotoUrl": "string",
+          "skills": "array of objects",
+          "stats": "object with experience, projects, satisfaction fields"
+        }
+      },
+      "sample_document": {
+        "id": "about1",
+        "title": "About Me",
+        "content": "I'm a passionate full-stack developer with expertise in creating modern web applications...",
+        "profilePhotoUrl": "https://example.com/profile.jpg",
+        "skills": [
+          {
+            "name": "Frontend Development",
+            "description": "Creating responsive and interactive user interfaces"
+          }
+        ],
+        "stats": {
+          "experience": "5+ Years",
+          "projects": "50+ Projects",
+          "satisfaction": "98% Client Satisfaction"
+        }
+      }
+    },
+    "projectsinfo": {
+      "description": "Collection containing project information",
+      "document_structure": {
+        "id": "project1",
+        "fields": {
+          "title": "string",
+          "description": "string",
+          "longDescription": "string",
+          "images": "array of strings",
+          "tags": "array of strings",
+          "repoUrl": "string",
+          "liveUrl": "string",
+          "category": "string",
+          "date": "string"
+        }
+      },
+      "sample_document": {
+        "id": "project1",
+        "title": "E-Commerce Platform",
+        "description": "A full-featured online shopping platform with payment integration...",
+        "longDescription": "A comprehensive e-commerce solution built with modern web technologies...",
+        "images": [
+          "https://example.com/project1.jpg",
+          "https://example.com/project2.jpg"
+        ],
+        "tags": ["Angular", "Node.js", "MongoDB", "Stripe"],
+        "repoUrl": "https://github.com/username/project",
+        "liveUrl": "https://project-demo.com",
+        "category": "Web Application",
+        "date": "2023-06-15"
+      }
+    },
+    "certificationinfo": {
+      "description": "Collection containing certification information",
+      "document_structure": {
+        "id": "cert1",
+        "fields": {
+          "title": "string",
+          "organization": "string",
+          "date": "string",
+          "description": "string",
+          "logo": "string"
+        }
+      },
+      "sample_document": {
+        "id": "cert1",
+        "title": "Google Cloud Professional Developer",
+        "organization": "Google Cloud",
+        "date": "2023-05-15",
+        "description": "Demonstrated expertise in designing, building, and managing cloud-based applications...",
+        "logo": "https://example.com/google-cloud-logo.png"
+      }
+    },
+    "educationinfo": {
+      "description": "Collection containing education information",
+      "document_structure": {
+        "id": "edu1",
+        "fields": {
+          "title": "string",
+          "subtitle": "string",
+          "period": "string",
+          "description": "string",
+          "location": "string",
+          "icon": "string",
+          "iconColor": "string",
+          "bgColor": "string",
+          "coursework": "array of strings",
+          "achievements": "array of strings"
+        }
+      },
+      "sample_document": {
+        "id": "edu1",
+        "title": "Master of Computer Science",
+        "subtitle": "Stanford University",
+        "period": "2018 - 2020",
+        "description": "Specialized in Artificial Intelligence and Machine Learning...",
+        "location": "Stanford, California",
+        "icon": "🎓",
+        "iconColor": "text-blue-400",
+        "bgColor": "bg-blue-500/10",
+        "coursework": [
+          "Machine Learning",
+          "Data Structures & Algorithms"
+        ],
+        "achievements": [
+          "Dean's List for 4 consecutive semesters"
+        ]
+      }
+    },
+    "experienceinfo": {
+      "description": "Collection containing work experience information",
+      "document_structure": {
+        "id": "exp1",
+        "fields": {
+          "title": "string",
+          "subtitle": "string",
+          "period": "string",
+          "description": "string",
+          "location": "string",
+          "icon": "string",
+          "iconColor": "string",
+          "bgColor": "string",
+          "technologies": "array of strings",
+          "keyProjects": "array of strings"
+        }
+      },
+      "sample_document": {
+        "id": "exp1",
+        "title": "Senior Full Stack Developer",
+        "subtitle": "Tech Innovations Inc.",
+        "period": "2021 - Present",
+        "description": "Lead development of multiple web applications serving over 100,000 users...",
+        "location": "San Francisco, California",
+        "icon": "💼",
+        "iconColor": "text-blue-400",
+        "bgColor": "bg-blue-500/10",
+        "technologies": [
+          "React",
+          "Node.js",
+          "TypeScript"
+        ],
+        "keyProjects": [
+          "Customer Portal Redesign",
+          "API Gateway Implementation"
+        ]
+      }
+    },
+    "skillsinfo": {
+      "description": "Collection containing skill information",
+      "document_structure": {
+        "id": "skill1",
+        "fields": {
+          "name": "string",
+          "category": "string",
+          "level": "number",
+          "icon": "string",
+          "description": "string"
+        }
+      },
+      "sample_document": {
+        "id": "skill1",
+        "name": "JavaScript",
+        "category": "Frontend",
+        "level": 95,
+        "icon": "🔹",
+        "description": "Expert in modern JavaScript (ES6+) and frameworks like React and Angular"
+      }
+    },
+    "contactinfo": {
+      "description": "Collection containing contact information",
+      "document_structure": {
+        "id": "contact1",
+        "fields": {
+          "title": "string",
+          "description": "string",
+          "phone": "string",
+          "email": "string",
+          "location": "string",
+          "socialLinks": "object with github, linkedin, twitter, instagram fields"
+        }
+      },
+      "sample_document": {
+        "id": "contact1",
+        "title": "Get In Touch",
+        "description": "Have a project in mind or want to discuss opportunities? Feel free to reach out!",
+        "phone": "+1 (123) 456-7890",
+        "email": "contact@example.com",
+        "location": "San Francisco, California",
+        "socialLinks": {
+          "github": "https://github.com/username",
+          "linkedin": "https://linkedin.com/in/username",
+          "twitter": "https://twitter.com/username",
+          "instagram": "https://instagram.com/username"
+        }
+      }
+    },
+    "heroinfo": {
+      "description": "Collection containing hero section information",
+      "document_structure": {
+        "id": "hero1",
+        "fields": {
+          "name": "string",
+          "tagline": "string",
+          "description": "string",
+          "profileImageUrl": "string",
+          "resumeUrl": "string",
+          "ctaButtons": "array of objects with text, link, primary fields"
+        }
+      },
+      "sample_document": {
+        "id": "hero1",
+        "name": "Atish Pawar",
+        "tagline": "Full Stack Developer & UI/UX Enthusiast",
+        "description": "Turning ideas into reality through clean, efficient code and beautiful user experiences.",
+        "profileImageUrl": "https://example.com/profile-main.jpg",
+        "resumeUrl": "https://example.com/resume.pdf",
+        "ctaButtons": [
+          {
+            "text": "View My Work",
+            "link": "#projects",
+            "primary": true
+          }
+        ]
+      }
+    },
+    "workflowinfo": {
+      "description": "Collection containing workflow information",
+      "document_structure": {
+        "id": "workflow1",
+        "fields": {
+          "title": "string",
+          "description": "string",
+          "steps": "array of objects with id, title, description, emoji fields",
+          "additionalInfo": "string"
+        }
+      },
+      "sample_document": {
+        "id": "workflow1",
+        "title": "My Workflow",
+        "description": "From idea to deployment — here's how I bring projects to life",
+        "steps": [
+          {
+            "id": "step1",
+            "title": "Plan",
+            "description": "Brainstorming & requirements gathering",
+            "emoji": "📝"
+          }
+        ],
+        "additionalInfo": "My workflow is iterative and adaptive..."
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 // Models
 export interface Hero {
@@ -19,6 +19,25 @@ export interface About {
   content: string;
   photoUrl: string;
   updatedAt: number;
+}
+
+export interface AboutSection {
+  profilePhotoUrl: string;
+  title: string;
+  content: string;
+  skills: AboutSkill[];
+  stats: AboutStats;
+}
+
+export interface AboutSkill {
+  name: string;
+  description: string;
+}
+
+export interface AboutStats {
+  experience: string;
+  projects: string;
+  satisfaction: string;
 }
 
 export interface Skill {
@@ -82,7 +101,7 @@ export interface ContactMessage {
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = '/api';
+  private apiUrl = '/api'; // This will use the proxy in development
 
   // Cache for frequently accessed data
   private heroCache = new BehaviorSubject<Hero | null>(null);
@@ -91,6 +110,20 @@ export class ApiService {
   private projectsCache = new BehaviorSubject<Project[] | null>(null);
 
   constructor(private http: HttpClient) { }
+
+  // Error handler
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = 'An unknown error occurred!';
+    if (error.error instanceof ErrorEvent) {
+      // Client-side error
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // Server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    console.error(errorMessage);
+    return throwError(() => errorMessage);
+  }
 
   // Public API methods
   getHero(): Observable<Hero> {
@@ -105,7 +138,8 @@ export class ApiService {
       map(hero => {
         this.heroCache.next(hero);
         return hero;
-      })
+      }),
+      catchError(this.handleError)
     );
   }
 
@@ -121,7 +155,21 @@ export class ApiService {
       map(about => {
         this.aboutCache.next(about);
         return about;
-      })
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+  // About Section methods
+  getAboutSection(): Observable<AboutSection> {
+    return this.http.get<AboutSection>(`${this.apiUrl}/about-section`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  updateAboutSection(aboutSection: AboutSection): Observable<AboutSection> {
+    return this.http.put<AboutSection>(`${this.apiUrl}/about-section`, aboutSection).pipe(
+      catchError(this.handleError)
     );
   }
 
@@ -137,7 +185,8 @@ export class ApiService {
       map(skills => {
         this.skillsCache.next(skills);
         return skills;
-      })
+      }),
+      catchError(this.handleError)
     );
   }
 
@@ -153,29 +202,40 @@ export class ApiService {
       map(projects => {
         this.projectsCache.next(projects);
         return projects;
-      })
+      }),
+      catchError(this.handleError)
     );
   }
 
   getExperience(): Observable<Experience[]> {
-    return this.http.get<Experience[]>(`${this.apiUrl}/experience`);
+    return this.http.get<Experience[]>(`${this.apiUrl}/experience`).pipe(
+      catchError(this.handleError)
+    );
   }
 
   getEducation(): Observable<Education[]> {
-    return this.http.get<Education[]>(`${this.apiUrl}/education`);
+    return this.http.get<Education[]>(`${this.apiUrl}/education`).pipe(
+      catchError(this.handleError)
+    );
   }
 
   getCertifications(): Observable<Certification[]> {
-    return this.http.get<Certification[]>(`${this.apiUrl}/certifications`);
+    return this.http.get<Certification[]>(`${this.apiUrl}/certifications`).pipe(
+      catchError(this.handleError)
+    );
   }
 
   getContactMessages(): Observable<ContactMessage[]> {
-    return this.http.get<ContactMessage[]>(`${this.apiUrl}/contact-messages`);
+    return this.http.get<ContactMessage[]>(`${this.apiUrl}/contact-messages`).pipe(
+      catchError(this.handleError)
+    );
   }
 
   // Contact form submission
   submitContactForm(message: ContactMessage): Observable<any> {
-    return this.http.post(`${this.apiUrl}/contact`, message);
+    return this.http.post(`${this.apiUrl}/contact`, message).pipe(
+      catchError(this.handleError)
+    );
   }
 
   // Admin API methods
@@ -184,7 +244,8 @@ export class ApiService {
       map(updatedHero => {
         this.heroCache.next(updatedHero);
         return updatedHero;
-      })
+      }),
+      catchError(this.handleError)
     );
   }
 
@@ -193,7 +254,8 @@ export class ApiService {
       map(updatedAbout => {
         this.aboutCache.next(updatedAbout);
         return updatedAbout;
-      })
+      }),
+      catchError(this.handleError)
     );
   }
 
@@ -203,7 +265,8 @@ export class ApiService {
         // Invalidate cache
         this.skillsCache.next(null);
         return newSkill;
-      })
+      }),
+      catchError(this.handleError)
     );
   }
 
@@ -213,7 +276,8 @@ export class ApiService {
         // Invalidate cache
         this.skillsCache.next(null);
         return updatedSkill;
-      })
+      }),
+      catchError(this.handleError)
     );
   }
 
@@ -222,7 +286,8 @@ export class ApiService {
       map(() => {
         // Invalidate cache
         this.skillsCache.next(null);
-      })
+      }),
+      catchError(this.handleError)
     );
   }
 
@@ -232,7 +297,8 @@ export class ApiService {
         // Invalidate cache
         this.projectsCache.next(null);
         return newProject;
-      })
+      }),
+      catchError(this.handleError)
     );
   }
 
@@ -242,7 +308,8 @@ export class ApiService {
         // Invalidate cache
         this.projectsCache.next(null);
         return updatedProject;
-      })
+      }),
+      catchError(this.handleError)
     );
   }
 
@@ -251,48 +318,69 @@ export class ApiService {
       map(() => {
         // Invalidate cache
         this.projectsCache.next(null);
-      })
+      }),
+      catchError(this.handleError)
     );
   }
 
   createExperience(experience: Experience): Observable<Experience> {
-    return this.http.post<Experience>(`${this.apiUrl}/experience`, experience);
+    return this.http.post<Experience>(`${this.apiUrl}/experience`, experience).pipe(
+      catchError(this.handleError)
+    );
   }
 
   updateExperience(id: string, experience: Experience): Observable<Experience> {
-    return this.http.patch<Experience>(`${this.apiUrl}/experience/${id}`, experience);
+    return this.http.patch<Experience>(`${this.apiUrl}/experience/${id}`, experience).pipe(
+      catchError(this.handleError)
+    );
   }
 
   deleteExperience(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/experience/${id}`);
+    return this.http.delete(`${this.apiUrl}/experience/${id}`).pipe(
+      catchError(this.handleError)
+    );
   }
 
   createEducation(education: Education): Observable<Education> {
-    return this.http.post<Education>(`${this.apiUrl}/education`, education);
+    return this.http.post<Education>(`${this.apiUrl}/education`, education).pipe(
+      catchError(this.handleError)
+    );
   }
 
   updateEducation(id: string, education: Education): Observable<Education> {
-    return this.http.patch<Education>(`${this.apiUrl}/education/${id}`, education);
+    return this.http.patch<Education>(`${this.apiUrl}/education/${id}`, education).pipe(
+      catchError(this.handleError)
+    );
   }
 
   deleteEducation(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/education/${id}`);
+    return this.http.delete(`${this.apiUrl}/education/${id}`).pipe(
+      catchError(this.handleError)
+    );
   }
 
   createCertification(certification: Certification): Observable<Certification> {
-    return this.http.post<Certification>(`${this.apiUrl}/certifications`, certification);
+    return this.http.post<Certification>(`${this.apiUrl}/certifications`, certification).pipe(
+      catchError(this.handleError)
+    );
   }
 
   updateCertification(id: string, certification: Certification): Observable<Certification> {
-    return this.http.patch<Certification>(`${this.apiUrl}/certifications/${id}`, certification);
+    return this.http.patch<Certification>(`${this.apiUrl}/certifications/${id}`, certification).pipe(
+      catchError(this.handleError)
+    );
   }
 
   deleteCertification(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/certifications/${id}`);
+    return this.http.delete(`${this.apiUrl}/certifications/${id}`).pipe(
+      catchError(this.handleError)
+    );
   }
 
   deleteContactMessage(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/contact-messages/${id}`);
+    return this.http.delete(`${this.apiUrl}/contact-messages/${id}`).pipe(
+      catchError(this.handleError)
+    );
   }
 
   // Cache invalidation for all data

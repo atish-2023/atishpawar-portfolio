@@ -68,12 +68,13 @@
               "buildTarget": "personalPortfolio:build:production"
             },
             "development": {
-              "buildTarget": "personalPortfolio:build:development"
+              "buildTarget": "personalPortfolio:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development",
           "options": {
-            "port": 4201
+            "port": 4204
           }
         },
         "extract-i18n": {
