@@ -1,11 +1,19 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SkillChipComponent } from '../../shared/components/feature/skill-chip/skill-chip.component';
+import { FirestoreDataService } from '../../core/firestore-data.service';
+import { Skill } from '../../core/models/skill.model';
+import { Subscription } from 'rxjs';
 
-interface Skill {
+interface Technology {
+  name: string;
+  level: number;
+}
+
+interface SkillGroup {
   name: string;
   category: string;
-  technologies: string[];
+  technologies: Technology[];
 }
 
 @Component({
@@ -15,58 +23,83 @@ interface Skill {
   templateUrl: './skills.component.html',
   styleUrls: ['./skills.component.scss']
 })
-export class SkillsComponent implements AfterViewInit {
-  skills: Skill[] = [
-    {
-      name: 'Frontend',
-      category: 'Building responsive and interactive user interfaces',
-      technologies: ['Angular', 'React', 'Vue.js', 'HTML5', 'CSS3', 'JavaScript', 'TypeScript']
-    },
-    {
-      name: 'Backend',
-      category: 'Developing robust server-side applications',
-      technologies: ['Node.js', 'Express', 'Java', 'Spring', 'Python', 'RESTful APIs']
-    },
-    {
-      name: 'Database',
-      category: 'Managing and optimizing data storage solutions',
-      technologies: ['MongoDB', 'PostgreSQL', 'MySQL', 'Firebase', 'Redis']
-    },
-    {
-      name: 'Tools',
-      category: 'Essential tools for development and deployment',
-      technologies: ['Git', 'Docker', 'AWS', 'Firebase', 'Jest', 'Cypress']
-    }
-  ];
+export class SkillsComponent implements AfterViewInit, OnInit, OnDestroy {
+  skills: SkillGroup[] = [];
+  
+  loading: boolean = true;
+  error: string | null = null;
+  private subscription: Subscription = new Subscription();
 
-  ngAfterViewInit() {
-    // Animation for skill cards on scroll
-    const skillCards = document.querySelectorAll('.animate-fade-in-up');
+  constructor(private firestoreService: FirestoreDataService) {
+    console.log('[SkillsComponent] Initializing component and attempting to fetch data from Firestore');
+  }
+  
+  ngOnInit(): void {
+    this.loadData();
+  }
+  
+  loadData(): void {
+    this.loading = true;
+    this.error = null;
     
-    // Immediately show the first few cards without waiting for intersection
-    skillCards.forEach((card, index) => {
-      if (index < 4) { // Show first row immediately
-        setTimeout(() => {
-          card.classList.remove('opacity-0');
-          card.classList.add('opacity-100');
-          card.classList.add('translate-y-0');
-        }, index * 100);
+    // Try to get data from Firestore
+    const sub = this.firestoreService.getSkillsData().subscribe({
+      next: (data) => {
+        if (data && data.length > 0) {
+          console.log(`[SkillsComponent] ${data.length} skills successfully loaded from Firestore`);
+          // Convert Firestore skills to grouped format
+          this.convertFirestoreSkills(data);
+        } else {
+          console.log('[SkillsComponent] No skills found in Firestore');
+        }
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('[SkillsComponent] Error fetching skills from Firestore:', error);
+        this.error = 'Failed to load skills data';
+        this.loading = false;
       }
     });
     
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.remove('opacity-0');
-          entry.target.classList.remove('translate-y-5');
-          entry.target.classList.add('opacity-100');
-          entry.target.classList.add('translate-y-0');
-        }
-      });
-    }, { threshold: 0.1 });
+    this.subscription.add(sub);
+  }
+
+  private convertFirestoreSkills(firestoreSkills: Skill[]): void {
+    // Group skills by category
+    const groupedSkills: { [key: string]: SkillGroup } = {};
     
-    skillCards.forEach(card => {
-      observer.observe(card);
+    firestoreSkills.forEach(skill => {
+      const category = skill.category || 'Other';
+      const technology = { name: skill.name, level: skill.level };
+      
+      if (!groupedSkills[category]) {
+        groupedSkills[category] = {
+          name: category,
+          category: category,
+          technologies: []
+        };
+      }
+      
+      // Avoid duplicates
+      const exists = groupedSkills[category].technologies.some(
+        tech => tech.name === technology.name
+      );
+      
+      if (!exists) {
+        groupedSkills[category].technologies.push(technology);
+      }
     });
+    
+    // Convert to array
+    this.skills = Object.values(groupedSkills);
+    console.log('[SkillsComponent] Converted Firestore skills to grouped format');
+  }
+
+  ngAfterViewInit() {
+    // ... existing animation code ...
+  }
+  
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

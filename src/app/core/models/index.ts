@@ -3,3 +3,4 @@ export * from './project.model';
 export * from './skill.model';
 export * from './profile.model';
 export * from './about-section.model';
+export * from './review.model';

@@ -18,7 +18,21 @@
     "setup-portfolio-firestore": "node setup-portfolio-firestore.js",
     "test-firebase-connection": "node test-firebase-connection.js",
     "verify-firestore-structure": "node verify-firestore-structure.js",
-    "test-firestore-data": "node test-firestore-data.js"
+    "test-firestore-data": "node test-firestore-data.js",
+    "firestore:setup": "node firestore-setup/setupPortfolioData.js",
+    "firestore:setup:hero": "node firestore-setup/setupHeroData.js",
+    "firestore:setup:about": "node firestore-setup/setupAboutData.js",
+    "firestore:setup:skills": "node firestore-setup/setupSkillsData.js",
+    "firestore:setup:projects": "node firestore-setup/setupProjectsData.js",
+    "firestore:setup:experience": "node firestore-setup/setupExperienceData.js",
+    "firestore:setup:education": "node firestore-setup/setupEducationData.js",
+    "firestore:setup:certifications": "node firestore-setup/setupCertificationsData.js",
+    "firestore:setup:contact": "node firestore-setup/setupContactData.js",
+    "firestore:setup:reviews": "node firestore-setup/setupReviewsData.js",
+    "firestore:setup:projects:corrected": "node firestore-setup/setupProjectsDataCorrected.js",
+    "firestore:setup:skills:corrected": "node firestore-setup/setupSkillsDataCorrected.js",
+    "firestore:verify:projects": "node verify-projects-data.js",
+    "firestore:verify:reviews": "node firestore-setup/verifyReviewsData.js"
   },
   "private": true,
   "dependencies": {
@@ -37,6 +51,7 @@
     "firebase": "^12.3.0",
     "firebase-admin": "^12.7.0",
     "firebase-tools": "^13.35.1",
+    "gsap": "^3.13.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

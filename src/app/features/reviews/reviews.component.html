@@ -1,0 +1,98 @@
+<!-- Loading State -->
+<div *ngIf="loading" class="flex justify-center items-center py-20">
+  <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+  <span class="ml-3 text-slate-300">Loading reviews...</span>
+</div>
+
+<!-- Error State -->
+<div *ngIf="!loading && error" class="py-20 text-center">
+  <div class="bg-red-900/50 border border-red-700 rounded-xl p-6 max-w-2xl mx-auto">
+    <div class="flex items-center justify-center mb-4">
+      <svg class="w-8 h-8 text-red-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      <h3 class="text-xl font-bold text-red-400">Error Loading Data</h3>
+    </div>
+    <p class="text-slate-300 mb-4">{{ error }}</p>
+    <button (click)="loadData()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
+      Retry
+    </button>
+  </div>
+</div>
+
+<!-- Content State -->
+<section id="reviews" class="py-20 relative overflow-hidden section-bg" *ngIf="!loading && !error">
+  <!-- Background elements -->
+  <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"></div>
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(139,92,246,0.1)_0%,rgba(0,0,0,0)_70%)]"></div>
+  
+  <div class="container mx-auto px-4 relative z-10">
+    <!-- Section Heading -->
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 section-heading">Client Reviews</h2>
+      <p class="text-slate-400 max-w-2xl mx-auto">What people say about my work</p>
+    </div>
+
+    <!-- No Reviews Message -->
+    <div *ngIf="reviews.length === 0" class="text-center py-10">
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-8 max-w-2xl mx-auto">
+        <svg class="w-16 h-16 text-slate-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+        </svg>
+        <h3 class="text-xl font-bold text-slate-300 mb-2">No Reviews Yet</h3>
+        <p class="text-slate-400">Check back later for client testimonials and feedback.</p>
+      </div>
+    </div>
+
+    <!-- Carousel for Reviews -->
+    <div class="relative max-w-6xl mx-auto" *ngIf="reviews.length > 0">
+      <!-- Horizontal sliding carousel container -->
+      <div class="overflow-hidden">
+        <!-- Sliding track -->
+        <div class="flex transition-transform duration-500 ease-in-out" 
+             [style.transform]="'translateX(-' + (currentIndex * 100) + '%)'">
+          <!-- Review items -->
+          <div class="flex-shrink-0 w-full" *ngFor="let review of reviews; let i = index">
+            <div class="flex justify-center">
+              <app-review-card [review]="review" class="review-item"></app-review-card>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Navigation Arrows -->
+      <button 
+        (click)="prev()" 
+        [disabled]="currentIndex === 0"
+        class="nav-button prev-button"
+        aria-label="Previous review"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+      </button>
+      
+      <button 
+        (click)="next()" 
+        [disabled]="currentIndex === reviews.length - 1"
+        class="nav-button next-button"
+        aria-label="Next review"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </button>
+      
+      <!-- Pagination Dots -->
+      <div class="pagination-dots">
+        <button 
+          *ngFor="let review of reviews; let i = index"
+          (click)="goToIndex(i)" 
+          class="dot"
+          [class.active]="i === currentIndex"
+          [attr.aria-label]="'Go to review ' + (i + 1)"
+        ></button>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,120 @@
+#reviews {
+  .section-heading {
+    position: relative;
+    display: inline-block;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+      border-radius: 2px;
+    }
+  }
+  
+  .section-bg {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%);
+  }
+  
+  // Carousel container
+  .carousel-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+  }
+  
+  // Review item styling
+  .review-item {
+    width: 100%;
+    max-width: 600px; // Consistent width for all cards
+    margin: 0 auto;
+  }
+  
+  // Navigation buttons
+  .nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(30, 41, 59, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    
+    &:hover:not(:disabled) {
+      background: rgba(99, 102, 241, 0.8);
+      transform: translateY(-50%) scale(1.1);
+    }
+    
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+  
+  .prev-button {
+    left: 20px;
+  }
+  
+  .next-button {
+    right: 20px;
+  }
+  
+  // Pagination dots
+  .pagination-dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    gap: 0.5rem;
+  }
+  
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    &.active {
+      background: #8b5cf6;
+      transform: scale(1.25);
+    }
+    
+    &:hover:not(.active) {
+      background: rgba(255, 255, 255, 0.5);
+    }
+  }
+  
+  // Responsive adjustments
+  @media (max-width: 768px) {
+    .nav-button {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .prev-button {
+      left: 10px;
+    }
+    
+    .next-button {
+      right: 10px;
+    }
+    
+    .review-item {
+      max-width: 90%;
+    }
+  }
+}

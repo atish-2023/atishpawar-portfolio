@@ -16,12 +16,44 @@
     <p class="text-slate-400 mb-4 text-sm text-center">{{ skill.category }}</p>
     
     <div class="flex flex-wrap justify-center gap-3">
-      <span 
-        *ngFor="let tech of skill.technologies; let i = index"
-        class="text-white text-sm font-medium px-3 py-1 rounded-full shadow-md transition duration-300"
-        [ngClass]="getTechTagClass(tech, i)">
-        {{ tech }}
-      </span>
+      <div *ngFor="let tech of skill.technologies; let i = index" 
+           class="tech-container relative"
+           (mouseenter)="onTechHover(tech, i, $event)"
+           (mouseleave)="onTechLeave()">
+        <span 
+          class="tech-badge text-white text-sm font-medium px-3 py-1 rounded-full shadow-md transition duration-300 flex items-center justify-center"
+          [ngClass]="getTechTagClass(tech, i)">
+          <span class="tech-text">{{ tech.name }}</span>
+        </span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Dialog-like overlay for circular progress positioned near the hovered element -->
+  <div *ngIf="hoveredTech.tech && hoveredTech.element" 
+       class="progress-overlay fixed z-50 pointer-events-none"
+       [style.transition]="'opacity 0.2s ease'"
+       [style.left.px]="getElementPosition().x"
+       [style.top.px]="getElementPosition().y"
+       style="transform: translate(-50%, -100%); margin-top: -10px;">
+    <div class="absolute bg-slate-900/90 backdrop-blur-lg rounded-2xl shadow-2xl p-6 border border-slate-700/50 transform transition-all duration-300 scale-100">
+      <div class="relative w-24 h-24">
+        <svg class="circular-progress" viewBox="0 0 60 60">
+          <circle class="circular-progress-bg" cx="30" cy="30" r="25"></circle>
+          <circle class="circular-progress-fill" 
+                  cx="30" 
+                  cy="30" 
+                  r="25" 
+                  [attr.style]="getCircularProgressStyle(hoveredTech.tech.level)"
+                  [ngClass]="getProgressColorClass(hoveredTech.index)"></circle>
+        </svg>
+        <span class="progress-text absolute inset-0 flex items-center justify-center text-white font-bold text-lg">
+          {{ hoveredTech.tech.level }}%
+        </span>
+      </div>
+      <div class="text-center mt-3">
+        <span class="text-slate-200 font-medium">{{ hoveredTech.tech.name }}</span>
+      </div>
     </div>
   </div>
 </div>

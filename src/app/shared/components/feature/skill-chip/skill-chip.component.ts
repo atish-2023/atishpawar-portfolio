@@ -1,10 +1,15 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+interface Technology {
+  name: string;
+  level: number;
+}
+
 interface Skill {
   name: string;
   category: string;
-  technologies: string[];
+  technologies: Technology[];
 }
 
 @Component({
@@ -16,6 +21,12 @@ interface Skill {
 })
 export class SkillChipComponent {
   @Input() skill!: Skill;
+  
+  // Track which tech is currently being hovered
+  hoveredTech: { tech: Technology | null, index: number | null, element: HTMLElement | null } = { tech: null, index: null, element: null };
+  
+  // Timer to prevent flickering
+  private hoverTimer: any = null;
 
   getIconClass(): string {
     const category = this.skill.name.toLowerCase();
@@ -39,7 +50,7 @@ export class SkillChipComponent {
     return backgroundMap[category] || 'bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400';
   }
 
-  getTechTagClass(tech: string, index: number): string {
+  getTechTagClass(tech: Technology, index: number): string {
     // Define a set of bright, balanced colors from the Tailwind palette
     const colorClasses = [
       'bg-blue-500 hover:bg-blue-600',
@@ -59,5 +70,82 @@ export class SkillChipComponent {
     // Use the index to cycle through colors, ensuring each tech gets a unique color
     const colorIndex = index % colorClasses.length;
     return colorClasses[colorIndex];
+  }
+
+  // Method to get the circular progress style based on proficiency level
+  getCircularProgressStyle(level: number): any {
+    const radius = 25;
+    const circumference = 2 * Math.PI * radius;
+    const strokeDashoffset = circumference - (level / 100) * circumference;
+    
+    return {
+      'stroke-dasharray': `${circumference} ${circumference}`,
+      'stroke-dashoffset': strokeDashoffset
+    };
+  }
+  
+  // Get the color class for the progress fill based on the tech index
+  getProgressColorClass(index: number | null): string {
+    if (index === null) return '';
+    
+    const colorClasses = [
+      'stroke-blue-500',
+      'stroke-emerald-500',
+      'stroke-pink-500',
+      'stroke-yellow-500',
+      'stroke-purple-500',
+      'stroke-indigo-500',
+      'stroke-orange-500',
+      'stroke-cyan-500',
+      'stroke-red-500',
+      'stroke-green-500',
+      'stroke-teal-500',
+      'stroke-rose-500'
+    ];
+    
+    const colorIndex = index % colorClasses.length;
+    return colorClasses[colorIndex];
+  }
+  
+  // Get element position for overlay placement
+  getElementPosition(): { x: number, y: number } {
+    if (this.hoveredTech.element) {
+      const rect = this.hoveredTech.element.getBoundingClientRect();
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0;
+      
+      // Position the overlay above and centered on the element
+      return {
+        x: rect.left + rect.width / 2 + scrollLeft,
+        y: rect.top + scrollTop - 10 // 10px above the element
+      };
+    }
+    return { x: 0, y: 0 };
+  }
+  
+  // Handle mouse enter event on tech badge
+  onTechHover(tech: Technology, index: number, event: any): void {
+    // Clear any existing timer
+    if (this.hoverTimer) {
+      clearTimeout(this.hoverTimer);
+    }
+    
+    // Set a small delay to prevent flickering
+    this.hoverTimer = setTimeout(() => {
+      this.hoveredTech = { tech, index, element: event.target };
+    }, 150); // Increased delay to 150ms for better stability
+  }
+
+  // Handle mouse leave event on tech badge
+  onTechLeave(): void {
+    // Clear any existing timer
+    if (this.hoverTimer) {
+      clearTimeout(this.hoverTimer);
+    }
+    
+    // Set a small delay before hiding to prevent flickering
+    this.hoverTimer = setTimeout(() => {
+      this.hoveredTech = { tech: null, index: null, element: null };
+    }, 150); // Increased delay to 150ms for better stability
   }
 }

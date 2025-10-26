@@ -18,6 +18,7 @@
   position: relative;
   display: inline-block;
   height: 1.5em; // Fixed height to prevent layout shift
+  vertical-align: middle;
 }
 
 // Typing text
@@ -25,6 +26,7 @@
   display: inline-block;
   overflow: hidden;
   white-space: nowrap;
+  vertical-align: middle;
 }
 
 // Cursor
@@ -32,14 +34,14 @@
   position: absolute;
   display: inline-block;
   height: 2.3em;
-  width: 0.15em;
-  padding-left: 1px;
-  background-color: #3b82f6;
-  margin-left: 0.1em;
+  width: 3px;
+  background-color: #3b82f6; // blue-500
+  margin-left: 4px;
   animation: blink 1s infinite;
   vertical-align: middle;
   top: 50%;
   transform: translateY(-50%);
+  border-radius: 1px;
 }
 
 // Gradient text animation

@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FirestoreDataService } from '../../core/firestore-data.service';
+import { ContactData } from '../../core/firestore-data.service';
 
 @Component({
   selector: 'app-contact',
@@ -10,6 +12,37 @@ import { CommonModule } from '@angular/common';
 })
 export class ContactComponent implements OnInit, OnDestroy {
   private scrollListener: (() => void) | null = null;
+  public contactData: ContactData | null = null;
+  public loading: boolean = true;
+  public error: string | null = null;
+
+  constructor(private firestoreService: FirestoreDataService) {
+    console.log('[ContactComponent] Initializing component and attempting to fetch data from Firestore');
+    this.loadData();
+  }
+  
+  public loadData(): void {
+    this.loading = true;
+    this.error = null;
+    
+    // Try to get data from Firestore
+    this.firestoreService.getContactData().subscribe({
+      next: (data) => {
+        if (data) {
+          console.log('[ContactComponent] Contact data successfully loaded from Firestore');
+          this.contactData = data;
+        } else {
+          console.log('[ContactComponent] No contact data found in Firestore');
+        }
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('[ContactComponent] Error fetching contact data from Firestore:', error);
+        this.error = 'Failed to load contact data';
+        this.loading = false;
+      }
+    });
+  }
 
   ngOnInit() {
     // Add scroll event listener

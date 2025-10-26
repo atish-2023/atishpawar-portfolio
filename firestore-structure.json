@@ -206,6 +206,31 @@
         }
       }
     },
+    "reviewsinfo": {
+      "description": "Collection containing client reviews and testimonials",
+      "document_structure": {
+        "id": "review1",
+        "fields": {
+          "name": "string",
+          "role": "string",
+          "message": "string",
+          "rating": "number (1-5)",
+          "image": "string",
+          "company": "string (optional)",
+          "date": "string"
+        }
+      },
+      "sample_document": {
+        "id": "review1",
+        "name": "Sarah Johnson",
+        "role": "Project Manager",
+        "message": "Atish delivered exceptional results on our e-commerce platform...",
+        "rating": 5,
+        "image": "https://example.com/reviewer-photo.jpg",
+        "company": "TechSolutions Inc.",
+        "date": "2023-10-15"
+      }
+    },
     "heroinfo": {
       "description": "Collection containing hero section information",
       "document_structure": {

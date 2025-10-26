@@ -1,3 +1,108 @@
+.tech-container {
+  position: relative;
+  display: inline-block;
+  
+  .tech-badge {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+  }
+}
+
+.circular-progress {
+  transform: rotate(-90deg);
+  width: 100%;
+  height: 100%;
+}
+
+.circular-progress-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 4;
+}
+
+.circular-progress-fill {
+  fill: none;
+  stroke-width: 4;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s ease;
+}
+
+.progress-text {
+  transition: all 0.3s ease;
+  font-weight: bold;
+  z-index: 3;
+  color: white;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+.progress-overlay {
+  // Add a small delay to prevent flickering
+  transition: opacity 0.2s ease;
+  
+  // Ensure the overlay doesn't interfere with hover events
+  pointer-events: none;
+}
+
+// Color variations for progress bars
+.stroke-blue-500 {
+  stroke: #3b82f6; // Blue
+}
+
+.stroke-emerald-500 {
+  stroke: #10b981; // Emerald
+}
+
+.stroke-pink-500 {
+  stroke: #ec4899; // Pink
+}
+
+.stroke-yellow-500 {
+  stroke: #eab308; // Yellow
+}
+
+.stroke-purple-500 {
+  stroke: #a855f7; // Purple
+}
+
+.stroke-indigo-500 {
+  stroke: #6366f1; // Indigo
+}
+
+.stroke-orange-500 {
+  stroke: #f97316; // Orange
+}
+
+.stroke-cyan-500 {
+  stroke: #06b6d4; // Cyan
+}
+
+.stroke-red-500 {
+  stroke: #ef4444; // Red
+}
+
+.stroke-green-500 {
+  stroke: #22c55e; // Green
+}
+
+.stroke-teal-500 {
+  stroke: #14b8a6; // Teal
+}
+
+.stroke-rose-500 {
+  stroke: #f43f5e; // Rose
+}
+
+// Rest of the existing styles
 .skill-card {
   transition: all 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
   
@@ -6,17 +111,6 @@
     .backdrop-blur-lg {
       backdrop-filter: blur(16px);
     }
-  }
-}
-
-// Add smooth transition for tech tags
-.skill-card span[class*="bg-"] {
-  transition: all 0.3s ease;
-  cursor: pointer;
-  
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   }
 }
 

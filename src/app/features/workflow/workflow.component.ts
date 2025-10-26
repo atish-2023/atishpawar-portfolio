@@ -41,4 +41,9 @@ export class WorkflowComponent {
       description: 'Monitoring and continuous improvement'
     }
   ];
+
+  constructor() {
+    console.log('[WorkflowComponent] Component initialized with hardcoded workflow steps');
+    console.log('[WorkflowComponent] Workflow data is not currently stored in Firestore');
+  }
 }

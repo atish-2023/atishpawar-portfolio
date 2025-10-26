@@ -13,38 +13,56 @@ service cloud.firestore {
       allow write: if request.auth != null; // Only authenticated users can write
     }
     
-    // Allow read access to skills collection
-    match /skills/{document} {
+    // Allow read access to skillsinfo collection
+    match /skillsinfo/{document} {
       allow read: if true;
       allow write: if request.auth != null;
     }
     
-    // Allow read access to projects collection
-    match /projects/{document} {
+    // Allow read access to projectsinfo collection
+    match /projectsinfo/{document} {
       allow read: if true;
       allow write: if request.auth != null;
     }
     
-    // Allow read access to experience collection
-    match /experience/{document} {
+    // Allow read access to experienceinfo collection
+    match /experienceinfo/{document} {
       allow read: if true;
       allow write: if request.auth != null;
     }
     
-    // Allow read access to education collection
-    match /education/{document} {
+    // Allow read access to educationinfo collection
+    match /educationinfo/{document} {
       allow read: if true;
       allow write: if request.auth != null;
     }
     
-    // Allow read access to certifications collection
-    match /certifications/{document} {
+    // Allow read access to certificationinfo collection
+    match /certificationinfo/{document} {
       allow read: if true;
       allow write: if request.auth != null;
     }
     
-    // Allow read access to aboutSection collection
-    match /aboutSection/{document} {
+    // Allow read access to aboutmeinfo collection
+    match /aboutmeinfo/{document} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    
+    // Allow read access to heroinfo collection
+    match /heroinfo/{document} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    
+    // Allow read access to contactinfo collection
+    match /contactinfo/{document} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    
+    // Allow read access to reviewsinfo collection
+    match /reviewsinfo/{document} {
       allow read: if true;
       allow write: if request.auth != null;
     }

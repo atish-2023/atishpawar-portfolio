@@ -1,0 +1,22 @@
+{
+  "name": "firestore-setup",
+  "version": "1.0.0",
+  "description": "Scripts to populate Firestore with portfolio data",
+  "main": "setupPortfolioData.js",
+  "scripts": {
+    "setup": "node setupPortfolioData.js",
+    "setup:hero": "node setupHeroData.js",
+    "setup:about": "node setupAboutData.js",
+    "setup:skills": "node setupSkillsData.js",
+    "setup:projects": "node setupProjectsData.js",
+    "setup:experience": "node setupExperienceData.js",
+    "setup:education": "node setupEducationData.js",
+    "setup:certifications": "node setupCertificationsData.js",
+    "setup:contact": "node setupContactData.js",
+    "setup:reviews": "node setupReviewsData.js",
+    "verify": "node verifyFirestoreData.js"
+  },
+  "keywords": ["firebase", "firestore", "portfolio", "setup"],
+  "author": "Atish Pawar",
+  "license": "MIT"
+}
