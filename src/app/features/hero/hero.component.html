@@ -1,5 +1,28 @@
+<!-- Loading State -->
+<div *ngIf="loading" class="flex justify-center items-center min-h-screen">
+  <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+  <span class="ml-3 text-slate-300">Loading hero section...</span>
+</div>
+
+<!-- Error State -->
+<div *ngIf="!loading && error" class="flex justify-center items-center min-h-screen">
+  <div class="bg-red-900/50 border border-red-700 rounded-xl p-6 max-w-2xl mx-auto">
+    <div class="flex items-center justify-center mb-4">
+      <svg class="w-8 h-8 text-red-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      <h3 class="text-xl font-bold text-red-400">Error Loading Data</h3>
+    </div>
+    <p class="text-slate-300 mb-4">{{ error }}</p>
+    <button (click)="loadData()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
+      Retry
+    </button>
+  </div>
+</div>
+
+<!-- Content State -->
 <section id="hero"
-  class="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-900 via-purple-900 to-black text-white relative overflow-hidden pt-20 md:pt-0">
+  class="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-900 via-purple-900 to-black text-white relative overflow-hidden pt-20 md:pt-0" *ngIf="!loading && !error">
   <!-- Background effects -->
   <div class="absolute inset-0">
     <div

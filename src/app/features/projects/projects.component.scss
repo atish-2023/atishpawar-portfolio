@@ -1,9 +1,34 @@
 .section-bg {
   background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  position: relative;
+  z-index: 1;
+}
+
+// Section heading with stable underline
+.section-heading {
+  position: relative;
+  display: inline-block;
+}
+
+.section-heading::after {
+  content: '';
+  position: absolute;
+  bottom: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10rem;
+  height: 0.25rem;
+  background: linear-gradient(to right, #38BDF8, #6366F1);
+  border-radius: 9999px;
 }
 
 .project-card {
   &:hover {
     transform: scale(1.03);
   }
+}
+
+#projects {
+  position: relative;
+  z-index: 10;
 }

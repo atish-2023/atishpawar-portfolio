@@ -6,6 +6,24 @@
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+// Section heading with stable underline
+.section-heading {
+  position: relative;
+  display: inline-block;
+}
+
+.section-heading::after {
+  content: '';
+  position: absolute;
+  bottom: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10rem;
+  height: 0.25rem;
+  background: linear-gradient(to right, #38BDF8, #6366F1);
+  border-radius: 9999px;
+}
+
 // Fade in up animation
 @keyframes fadeInUp {
   from {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApiService, AboutSection } from '../../core/api.service';
+import { FirestoreDataService } from '../../core/firestore-data.service';
+import { AboutSection } from '../../core/models/about-section.model';
 
 @Component({
   selector: 'app-about',
@@ -10,47 +11,37 @@ import { ApiService, AboutSection } from '../../core/api.service';
   styleUrls: ['./about.component.scss']
 })
 export class AboutComponent implements OnInit {
-  aboutSection: AboutSection | null = null;
+  public aboutSection: AboutSection | null = null;
+  public loading: boolean = true;
+  public error: string | null = null;
   
-  constructor(private apiService: ApiService) {}
+  constructor(private firestoreService: FirestoreDataService) {}
   
   ngOnInit(): void {
-    this.apiService.getAboutSection().subscribe(
-      data => {
-        this.aboutSection = data;
+    console.log('[AboutComponent] Initializing component and attempting to fetch data from Firestore');
+    this.loadData();
+  }
+  
+  public loadData(): void {
+    this.loading = true;
+    this.error = null;
+    
+    // Get data from Firestore
+    this.firestoreService.getAboutData().subscribe({
+      next: (data) => {
+        if (data) {
+          console.log('[AboutComponent] Data successfully loaded from Firestore');
+          this.aboutSection = data;
+        } else {
+          console.log('[AboutComponent] No data found in Firestore');
+        }
+        this.loading = false;
       },
-      error => {
-        console.error('Error fetching about section data:', error);
-        // Fallback to default data
-        this.aboutSection = {
-          profilePhotoUrl: "./../../../../public/src/assets/scalartechhub.png",
-          title: "I'm Atish Datattray Pawar",
-          content: "I'm a passionate software engineer specialized in building full-stack web applications...",
-          skills: [
-            {
-              name: "Frontend Development",
-              description: "Building responsive and modern UI with Angular, React, and Tailwind CSS."
-            },
-            {
-              name: "Backend Development",
-              description: "Creating scalable REST APIs using Node.js, Express, and Firebase."
-            },
-            {
-              name: "UI/UX Design",
-              description: "Designing user-friendly interfaces with Figma and Adobe XD."
-            },
-            {
-              name: "Cloud Deployment",
-              description: "Deploying and managing applications on Firebase, AWS, and Vercel."
-            }
-          ],
-          stats: {
-            experience: "5+ Years Experience",
-            projects: "20+ Projects Completed",
-            satisfaction: "100% Client Satisfaction"
-          }
-        };
+      error: (error) => {
+        console.error('[AboutComponent] Error fetching data from Firestore:', error);
+        this.error = 'Failed to load data from database';
+        this.loading = false;
       }
-    );
+    });
   }
 }

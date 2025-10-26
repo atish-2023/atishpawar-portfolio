@@ -2,6 +2,24 @@
   background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
 }
 
+// Section heading with stable underline
+.section-heading {
+  position: relative;
+  display: inline-block;
+}
+
+.section-heading::after {
+  content: '';
+  position: absolute;
+  bottom: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 13rem;
+  height: 0.25rem;
+  background: linear-gradient(to right, #38BDF8, #6366F1);
+  border-radius: 9999px;
+}
+
 // Additional glow effect for the timeline image
 .timeline-image-glow {
   filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.7)) drop-shadow(0 0 20px rgba(139, 92, 246, 0.5));

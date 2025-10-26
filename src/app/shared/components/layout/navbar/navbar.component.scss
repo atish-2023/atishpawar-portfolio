@@ -67,6 +67,31 @@
   background-clip: text;
 }
 
+// Adding specific color for Reviews link
+.nav-link[href="#reviews"] {
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(to right, #3b82f6, #8b5cf6);
+    transition: width 0.3s ease;
+  }
+  
+  &:hover {
+    color: #fff;
+    text-shadow: 0 0 8px rgba(139, 92, 246, 0.5); // purple-500 glow
+    
+    &::after {
+      width: 100%;
+    }
+  }
+}
+
 // Solid navbar style with enhanced blur
 .nav-solid {
   background: rgba(15, 23, 42, 0.7); // slate-900 with 0.7 opacity for better glass effect

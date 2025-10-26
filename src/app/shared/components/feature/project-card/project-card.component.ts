@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Project } from '../../../../core/models/project.model';
 
@@ -9,6 +9,10 @@ import { Project } from '../../../../core/models/project.model';
   templateUrl: './project-card.component.html',
   styleUrls: ['./project-card.component.scss']
 })
-export class ProjectCardComponent {
+export class ProjectCardComponent implements OnInit {
   @Input() project!: Project;
+
+  ngOnInit(): void {
+    console.log('[ProjectCardComponent] Project data received:', this.project);
+  }
 }

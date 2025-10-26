@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HeroComponent } from '../hero/hero.component';
 import { AboutComponent } from '../about/about.component';
 import { SkillsComponent } from '../skills/skills.component';
@@ -9,6 +9,7 @@ import { ContactComponent } from '../contact/contact.component';
 import { FooterComponent } from '../../shared/components/layout/footer/footer.component';
 import { CertificationComponent } from "../certification/certification.component";
 import { WorkflowComponent } from "../workflow/workflow.component";
+import { ReviewsComponent } from '../reviews/reviews.component';
 
 @Component({
   selector: 'app-landing-page',
@@ -23,12 +24,18 @@ import { WorkflowComponent } from "../workflow/workflow.component";
     ContactComponent,
     FooterComponent,
     CertificationComponent,
-    WorkflowComponent
+    WorkflowComponent,
+    ReviewsComponent
 ],
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss']
 })
-export class LandingPageComponent {
+export class LandingPageComponent implements OnInit {
   // This component serves as the main layout for the portfolio
   // It composes all the feature components into a cohesive landing page
+  
+  ngOnInit(): void {
+    console.log('[LandingPageComponent] Portfolio application initialized');
+    console.log('[LandingPageComponent] Check console for Firestore data tracing messages in individual components');
+  }
 }

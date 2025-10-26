@@ -1,15 +1,9 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProjectCardComponent } from '../../shared/components/feature/project-card/project-card.component';
-
-interface Project {
-  title: string;
-  description: string;
-  tags: string[];
-  repoUrl: string;
-  liveUrl: string;
-  images?: string[];
-}
+import { FirestoreDataService } from '../../core/firestore-data.service';
+import { Project } from '../../core/models/project.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-projects',
@@ -18,82 +12,58 @@ interface Project {
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss']
 })
-export class ProjectsComponent implements AfterViewInit {
-  projects: Project[] = [
-    {
-      title: 'E-Commerce Platform',
-      description: 'A full-featured online shopping platform with payment integration and inventory management.',
-      tags: ['Angular', 'Node.js', 'MongoDB'],
-      repoUrl: '#',
-      liveUrl: '#'
-    },
-    {
-      title: 'Task Management App',
-      description: 'A collaborative task management application with real-time updates and team features.',
-      tags: ['React', 'Express', 'Firebase'],
-      repoUrl: '#',
-      liveUrl: '#'
-    },
-    {
-      title: 'Personal Portfolio',
-      description: 'A modern and responsive personal portfolio website showcasing my projects and skills.',
-      tags: ['Vue.js', 'Node.js', 'Firebase'],
-      repoUrl: '#',
-      liveUrl: '#'
-    },
-    {
-      title: 'Health & Fitness Tracker',
-      description: 'A comprehensive health tracking application with workout plans and nutrition guidance.',
-      tags: ['Vue.js', 'Python', 'PostgreSQL'],
-      repoUrl: '#',
-      liveUrl: '#'
-    },
-    {
-      title: 'Health & Fitness Tracker',
-      description: 'A comprehensive health tracking application with workout plans and nutrition guidance.',
-      tags: ['Vue.js', 'Python', 'PostgreSQL'],
-      repoUrl: '#',
-      liveUrl: '#'
-    }
-    ,
-    {
-      title: 'Health & Fitness Tracker',
-      description: 'A comprehensive health tracking application with workout plans and nutrition guidance.',
-      tags: ['Vue.js', 'Python', 'PostgreSQL'],
-      repoUrl: '#',
-      liveUrl: '#'
-    }
-  ];
+export class ProjectsComponent implements AfterViewInit, OnInit, OnDestroy {
+  public projects: Project[] = [];
+  
+  public loading: boolean = true;
+  public error: string | null = null;
+  private subscription: Subscription = new Subscription();
 
-  ngAfterViewInit() {
-    // Animation for project cards on scroll
-    const projectCards = document.querySelectorAll('.animate-on-scroll');
+  constructor(private firestoreService: FirestoreDataService) {
+    console.log('[ProjectsComponent] Initializing component and attempting to fetch data from Firestore');
+  }
+  
+  ngOnInit(): void {
+    console.log('[ProjectsComponent] ngOnInit called');
+    this.loadData();
+  }
+  
+  public loadData(): void {
+    console.log('[ProjectsComponent] loadData called');
+    this.loading = true;
+    this.error = null;
     
-    // Immediately show the first few cards without waiting for intersection
-    projectCards.forEach((card, index) => {
-      if (index < 3) { // Show first row immediately
-        setTimeout(() => {
-          card.classList.remove('opacity-0');
-          card.classList.remove('translate-y-5');
-          card.classList.add('opacity-100');
-          card.classList.add('translate-y-0');
-        }, index * 100);
+    // Try to get data from Firestore
+    const sub = this.firestoreService.getProjectsData().subscribe({
+      next: (data) => {
+        console.log('[ProjectsComponent] Received data from Firestore:', data);
+        if (data && data.length > 0) {
+          console.log(`[ProjectsComponent] ${data.length} projects successfully loaded from Firestore`);
+          console.log('[ProjectsComponent] Sample project data:', data[0]);
+          this.projects = data;
+        } else {
+          console.log('[ProjectsComponent] No projects found in Firestore');
+        }
+        this.loading = false;
+        console.log('[ProjectsComponent] Final projects array:', this.projects);
+      },
+      error: (error) => {
+        console.error('[ProjectsComponent] Error fetching projects from Firestore:', error);
+        this.error = 'Failed to load projects data';
+        this.loading = false;
       }
     });
     
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.remove('opacity-0');
-          entry.target.classList.remove('translate-y-5');
-          entry.target.classList.add('opacity-100');
-          entry.target.classList.add('translate-y-0');
-        }
-      });
-    }, { threshold: 0.1 });
-    
-    projectCards.forEach(card => {
-      observer.observe(card);
-    });
+    this.subscription.add(sub);
+  }
+
+  ngAfterViewInit() {
+    console.log('[ProjectsComponent] ngAfterViewInit called - Projects rendered');
+    console.log('[ProjectsComponent] Number of projects to display:', this.projects.length);
+  }
+  
+  ngOnDestroy(): void {
+    console.log('[ProjectsComponent] ngOnDestroy called');
+    this.subscription.unsubscribe();
   }
 }
