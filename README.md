@@ -36,6 +36,32 @@ npm run server        # Backend on http://localhost:3003
 
 ---
 
+## 🌐 Deployment
+
+### Vercel Deployment
+
+This project is configured for deployment to Vercel. To deploy:
+
+1. Push your code to a GitHub repository
+2. Connect your repository to Vercel
+3. Vercel will automatically detect the Angular project and use the correct build settings
+4. The build command is set to `npm run build` (which runs `ng build --configuration production`)
+5. The output directory is `dist/personal-portfolio`
+
+No additional configuration is needed as the `vercel.json` file is already included in the project.
+
+### Firebase Deployment
+
+For Firebase deployment:
+
+1. Create a Firebase project at https://console.firebase.google.com/
+2. Install Firebase CLI: `npm install -g firebase-tools`
+3. Login to Firebase: `firebase login`
+4. Initialize Firebase in your project: `firebase init`
+5. Deploy: `firebase deploy`
+
+---
+
 ## 📚 Complete Documentation
 
 This project includes comprehensive documentation to guide your development:
